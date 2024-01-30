@@ -9,12 +9,12 @@ $.getJSON("/data.json", (data) => {
     $("#about-me-card-description").text(events[0].description);
     $("#about-me-card-img").css("background-image", `url(${events[0].img})`);
     for (let i = 0; i < events.length; i++) {
-        const elt = $(`<span ${(i === 0) ? "selected" : ""}>${events[i].date}</span>`);
+        const elt = $(`<time ${(i === 0) ? "selected" : ""}>${events[i].date}</time>`);
         dates.append(elt);
         $("#preload").append(`<img alt="" src="${events[i].img}">`);
         elt.on("click", () => {
             if (i !== eventSelected) {
-                for (const e of $("#about-me-timeline span")) {
+                for (const e of $("#about-me-timeline time")) {
                     $(e).removeAttr("selected");
                 }
                 elt.attr("selected", "");
@@ -37,15 +37,15 @@ $.getJSON("/data.json", (data) => {
         const project = projects[i];
         const elt = $(`<div id="project-${i}" class="project${i === 0 ? ' selected' : ''}">
                             <div class="top" style="background-image: url('${project.img}');"></div>
-                            <div class="side-text">${project.title} - ${project.subtitle}</div>
-                            <div class="middle">
+                            <aside class="side-text">${project.title} - ${project.subtitle}</aside>
+                            <article class="middle">
                                 <h1>${project.title}</h1>
                                 <h2>${project.subtitle}</h2>
                                 <p>${project.description}</p>
                                 <a href="${project.url}"><i class="gg-display-flex"></i> Lien vers le projet</a>
                                 <br>
                                 <a href="${project.code_url}"><i class="gg-terminal"></i> Lien vers le code</a>
-                            </div>
+                            </article>
                             <div style="background: ${project.color}"></div>
                         </div>`);
         projectsElt.append(elt);
