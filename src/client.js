@@ -1,5 +1,10 @@
+function mod(n, m) {
+    const remain = n % m;
+    return Math.floor(remain >= 0 ? remain : remain + m);
+}
+
 $.getJSON("/data.json", (data) => {
-    const { events, projects, other_contacts } = data;
+    const { events, projects } = data;
 
     // Timeline events
     const dates = $("#about-me-timeline");
@@ -8,6 +13,21 @@ $.getJSON("/data.json", (data) => {
     $("#about-me-card-title").text(events[0].title);
     $("#about-me-card-description").text(events[0].description);
     $("#about-me-card-img").css("background-image", `url(${events[0].img})`);
+    card.on("click", e => {
+        if (window.innerWidth < 700) {
+            const i = mod(e.pageX > window.innerWidth/2 ? eventSelected+1 : eventSelected-1, events.length);
+            if (i !== eventSelected) {
+                eventSelected = i;
+                card.css("opacity", 0);
+                setTimeout(() => {
+                    $("#about-me-card-title").text(events[i].title);
+                    $("#about-me-card-description").text(events[i].description);
+                    $("#about-me-card-img").css("background-image", `url(${events[i].img})`);
+                    card.css("opacity", 1);
+                }, 250);
+            }
+        }
+    });
     for (let i = 0; i < events.length; i++) {
         const elt = $(`<time ${(i === 0) ? "selected" : ""}>${events[i].date}</time>`);
         dates.append(elt);
@@ -46,7 +66,7 @@ $.getJSON("/data.json", (data) => {
                                 <br>
                                 <a href="${project.code_url}"><i class="gg-terminal"></i> Lien vers le code</a>
                             </article>
-                            <div style="background: ${project.color}"></div>
+                            <div style="background: ${project.color}; grid-area: d;"></div>
                         </div>`);
         projectsElt.append(elt);
         $("#preload").append(`<img alt="" src="${project.img}">`);

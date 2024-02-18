@@ -18,6 +18,17 @@ body {
     overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background-color: lightgray;
+}
+::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {
+    background-color: darkgray;
+}
+
 section {
     position: absolute;
     width: 100vw;
@@ -117,4 +128,28 @@ footer {
     width: 100vw;
     height: 50px;
     background-color: var(--blue-2);
+}
+
+@media screen and (max-width: 700px) {
+    h2 {
+        font-size: 2em;
+        margin-top: 25px;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+    h4 {
+        font-size: 1em;
+    }
+    h5 {
+        font-size: 0.75em;
+    }
+    button, input[type=submit] {
+        font-size: 1.5em;
+        max-width: 300px;
+    }
+    footer {
+        height: 20px;
+        font-size: 10px
+    }
 }
