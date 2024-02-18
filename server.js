@@ -37,7 +37,7 @@ app.post("/send-mail", async (req, res) => {
         mailData.hasOwnProperty("body")) {
         try {
             await sendMail(mailData);
-            postResMessage(res, "Le mail a bien été envoyé ! Je vous répond le plus rapidement possible !")
+            postResMessage(res, "Le mail a bien été envoyé ! Je vous réponds le plus rapidement possible !")
         } catch (e) {
             postResMessage(res, "Une erreur s'est produite lors de l'envois du mail : " + e.message);
         }
