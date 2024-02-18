@@ -6,10 +6,9 @@ const app = express();
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
-    secureConnection: false,
-    port: 587,
-    tls: { ciphers: "SSLv3" },
+    host: "smtp.ionos.fr",
+    secureConnection: true,
+    port: 465,
     auth: {
         user: EMAIL.user,
         pass: EMAIL.pass
