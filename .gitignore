@@ -1,4 +1,4 @@
 node_modules
+.env
 .idea
-config.json
-public/data.json
+.next
