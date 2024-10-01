@@ -1,9 +1,9 @@
 "use client";
 
-import { LocomotiveScrollProvider } from "react-locomotive-scroll";
+import {LocomotiveScrollProvider} from "react-locomotive-scroll";
 import {ReactNode, useRef} from "react";
 
-export default function ScrollProvider({ children }: {
+export default function ScrollProvider({children}: {
     children: ReactNode;
 }) {
     const containerRef = useRef(null);
@@ -11,10 +11,10 @@ export default function ScrollProvider({ children }: {
         <LocomotiveScrollProvider
             options={{
                 smooth: true,
-                tablet: { smooth: true },
-                smartphone: { smooth: true },
+                tablet: {smooth: true},
+                smartphone: {smooth: true},
                 log: false
-        }}
+            }}
             watch={[children]}
             containerRef={containerRef}
         >

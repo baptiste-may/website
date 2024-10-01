@@ -176,7 +176,7 @@ function LittleFire({SVG}: {
 
 export default function Landing() {
 
-    const { scroll } = useLocomotiveScroll();
+    const {scroll} = useLocomotiveScroll();
 
     const [stars] = useState<{ left: string; top: string; }[]>([]);
     const [, setStarsReady] = useState(false);

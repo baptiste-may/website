@@ -16,7 +16,7 @@ import {useLocomotiveScroll} from "react-locomotive-scroll";
 
 export default function Home() {
 
-    const { scroll } = useLocomotiveScroll();
+    const {scroll} = useLocomotiveScroll();
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => setIsLoading(false), []);

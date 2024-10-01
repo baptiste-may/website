@@ -7,7 +7,8 @@ import ScrollProvider from "@/components/ScrollProvider";
 
 const inter = Inter({subsets: ["latin"]});
 
-const title = "May Baptiste", description = "Bienvenue dans mon monde ! Je suis Baptiste, un jeune étudiant en informatique. Venez découvrir mes créations numériques captivantes, où l'innovation rencontre l’originalité !";
+const title = "May Baptiste",
+    description = "Bienvenue dans mon monde ! Je suis Baptiste, un jeune étudiant en informatique. Venez découvrir mes créations numériques captivantes, où l'innovation rencontre l’originalité !";
 
 export const metadata = {
     title,
@@ -27,15 +28,15 @@ export default function RootLayout({
 }) {
     return (
         <html lang="fr" style={{scrollBehavior: "smooth"}}>
-            <body className={inter.className}>
-                <main>
-                    <ScrollProvider>
-                        <AlertProvider>
-                            {children}
-                        </AlertProvider>
-                    </ScrollProvider>
-                </main>
-            </body>
+        <body className={inter.className}>
+        <main>
+            <ScrollProvider>
+                <AlertProvider>
+                    {children}
+                </AlertProvider>
+            </ScrollProvider>
+        </main>
+        </body>
         </html>
     )
 }

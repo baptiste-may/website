@@ -6,7 +6,7 @@ export default function UpButton({onClick}: {
     onClick: () => void;
 }) {
 
-    const { scroll } = useLocomotiveScroll();
+    const {scroll} = useLocomotiveScroll();
     const [hidden, setHidden] = useState(false);
 
     function updateHidden() {
@@ -16,7 +16,9 @@ export default function UpButton({onClick}: {
     useEffect(() => {
         updateHidden();
         if (scroll) {
-            scroll.on("scroll", ({ scroll }: { scroll: { y: number; } }) => setHidden(scroll.y <= window.innerHeight / 3));
+            scroll.on("scroll", ({scroll}: {
+                scroll: { y: number; }
+            }) => setHidden(scroll.y <= window.innerHeight / 3));
         }
     });
 
