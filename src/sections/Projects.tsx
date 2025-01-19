@@ -2,6 +2,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {WindowIcon, CodeBracketSquareIcon} from "@heroicons/react/24/solid";
 import {useState} from "react";
 import {getLang, Language, LanguagesKey} from "@/utils";
+import {projects} from "@/config";
 
 function ProjectsLanguage({percentage, lang, selected, vertical}: {
     percentage: number;
@@ -138,97 +139,6 @@ function Project({title, subtitle, description, backgroundImage, url, codeUrl, l
 }
 
 export default function Projects() {
-
-    const projects = [
-        {
-            title: "GRHB",
-            subtitle: "Refonte de site web",
-            description: "J'ai proposé mes services au Groupe de Recherches Historiques de Busnes. Le principe était de refaire le site internet en le rendant plus moderne et plus dynamique tout en gardant la même charte graphique et les mêmes fonctionnalités. Encore maintenant, je reste en contact avec l'équipe pour tout autre problème ou nouveautés à ajouter.",
-            backgroundImage: "https://busnes-histoire.fr/imgs/bg.jpg",
-            url: "https://busnes-histoire.fr",
-            codeUrl: "https://github.com/DjRedstone/GRHB",
-            languages: [
-                {
-                    percentage: 55.4,
-                    lang: "js"
-                },
-                {
-                    percentage: 33,
-                    lang: "html"
-                },
-                {
-                    percentage: 11.6,
-                    lang: "css"
-                }
-            ]
-        },
-        {
-            title: "Nosto",
-            subtitle: "Plugin Java pour Minecraft",
-            description: "Durant mon année de seconde qui se croisait avec la pandémie de COVID-19, je me suis lancé dans un gros projet : réaliser un serveur Minecraft original avec des idées innovantes. Je me suis entouré d'un petite équipe comprenant notamment un autre développeur Java. Le projet fut arrêté en juillet 2022 faute de temps.",
-            backgroundImage: "https://i3.ytimg.com/vi/1MzmkukDqWc/maxresdefault.jpg",
-            codeUrl: "https://github.com/nostoMC/plugins",
-            languages: [
-                {
-                    percentage: 100,
-                    lang: "java"
-                },
-            ]
-        },
-        {
-            title: "ESC Voting Animation",
-            subtitle: "Animation de vote via Web 3.0",
-            description: "Dans le cadre de l'Eurovision Smoot Contest 2022, en plus de m'occuper des animations 3D, j'ai réalisé l'animation des votes du public. Le fait de créer cette animation en HTML/CSS/JS m'a permis de designer facilement ces votes en plus de pouvoir connecter les résultats à un Google Sheet.",
-            backgroundImage: "https://i.ytimg.com/vi/V5gGPs3wSS4/maxresdefault.jpg",
-            codeUrl: "https://github.com/Eurovision-Smoot-Contest/2022-voting-animation",
-            languages: [
-                {
-                    percentage: 66.7,
-                    lang: "js"
-                },
-                {
-                    percentage: 23.8,
-                    lang: "css"
-                },
-                {
-                    percentage: 9.5,
-                    lang: "html"
-                }
-            ]
-        },
-        {
-            title: "Python Battleship",
-            subtitle: "Bataile Navale en Python",
-            description: "Ce projet a été réalisé en un mois. Il s'agit d'une simple bataile navale en Python permettant de contrôler facilement les joueurs et de pouvoir créer des robots.",
-            backgroundImage: "https://images.alphacoders.com/101/thumb-1920-1012203.jpg",
-            url: "https://github.com/DjRedstone/python-battleship",
-            codeUrl: "https://github.com/DjRedstone/python-battleship",
-            languages: [
-                {
-                    percentage: 100,
-                    lang: "py"
-                }
-            ]
-        },
-        {
-            title: "Schtroumpfdle",
-            subtitle: "Mastermind des schtroumpfs",
-            description: "Le principe du jeu est inspiré des sites comme LOLdle ou encore Pokedle. Le but est de retrouver un schtroumpf par jour en fesant des propositions successives dans le style Mastermind.",
-            backgroundImage: "https://gtv.digimondo.net/var/gtv/storage/gtvimages/1/5/2/5/3/3/152533245/14846570800800.jpg",
-            url: "https://schtroumpfdle.may-baptiste.fr",
-            codeUrl: "https://github.com/DjRedstone/schtroumpfdle",
-            languages: [
-                {
-                    percentage: 71.7,
-                    lang: "js"
-                },
-                {
-                    percentage: 28.3,
-                    lang: "html"
-                }
-            ]
-        },
-    ];
 
     const [selectedProject, setSelectedProject] = useState(0);
 

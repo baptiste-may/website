@@ -1,36 +1,9 @@
 import {useState} from "react";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import {motion, AnimatePresence} from "framer-motion";
-
-interface Event {
-    date: number;
-    title: string;
-    description: string;
-    img: string;
-}
+import {events} from "@/config";
 
 export default function AboutMe() {
-
-    const events: Event[] = [
-        {
-            date: 2023,
-            title: "Baccalauréat et licence informatique",
-            description: "2023 fut ma dernière année au lycée. J'ai obtenu mon Baccalauréat Général avec mention Très Bien et Européenne. Depuis, j'étudie à la faculté des sciences de Lens en licence Informatique. Sur mon temps libre, je participe à des entrainements de programmation compétitive dans l'enceinte de l'université. J'ai notamment participé à ARC (Artois pRogrammation Contest) en octobre où notre équipe a fini deuxième. Grâce à cela, nous sommes inscrits pour le SWERC (Southwestern Europe Regional Contest).",
-            img: "https://www.le-flux.fr/voy_content/uploads/2017/10/universite-dartois-faculte-des-sciences-bibliotheque-universitaire-a-lens-batiment-prestige-facade-flickr-768x576.jpg",
-        },
-        {
-            date: 2021,
-            title: "Projets et organisations majeures",
-            description: "Pendant cette période, j'ai eu le temps de réaliser une multitude de projets divers avec des équipes de différentes tailles. Par exemple, j'ai lancé mon serveur Minecraft en équipe de 4 où j'ai beaucoup travailé avec un autre développeur. J'ai également eu l'opportunité de participer à un événement sur un projet anglophone (The Unofficial Uncensored Library).",
-            img: "https://static.dezeen.com/uploads/2021/08/uncensored-library-reporters-without-borders-minecraft-technology-_dezeen_2364_col_4.jpg",
-        },
-        {
-            date: 2019,
-            title: "Stage d'observation en entreprise (web design)",
-            description: "En 2019, en classe de troisième, j'ai effectué un stage d'observation dans une entreprise nommé \"Level Up\" dans le domaine du web design. J'ai pu observer une équipe de web designers et de graphistes, apprendre le processus de création de sites web, et renforcer mon intérêt dans ce domaine, m'incitant à envisager des études supérieures dans celui-ci.",
-            img: "https://sujata.ch/wp2013/wp-content/uploads/Slide5.jpg",
-        }
-    ];
 
     let [event, setEvent] = useState(events[0]);
     let [index, setIndex] = useState(0);

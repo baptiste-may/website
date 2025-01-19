@@ -10,7 +10,7 @@ const LANGUAGES: Record<string, Language> = {
     },
     ts: {
         name: "TypeScript",
-        color: "blue"
+        color: "#3178c6"
     },
     css: {
         name: "CSS",
