@@ -12,13 +12,27 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+/**
+ * Send an email to the address specified in the `EMAIL_USER` environment
+ * variable from the email address specified in `email` with the subject
+ * `subject` and the body `body`.
+ *
+ * @param name - The sender's name.
+ * @param forename - The sender's forename.
+ * @param email - The sender's email address.
+ * @param subject - The email subject.
+ * @param body - The email body.
+ *
+ * @returns {Promise<void>} A promise that resolves or rejects based on the
+ * success or failure of the email delivery.
+ */
 function sendMail({name, forename, email, subject, body}: {
     name: string;
     forename: string;
     email: string;
     subject: string;
     body: string;
-}) {
+}): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         const mailOptions = {
             from: `"${name} ${forename} - ${email}" <${EMAIL_USER}>`,

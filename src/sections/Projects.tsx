@@ -1,8 +1,26 @@
 import {AnimatePresence, motion} from "framer-motion";
-import {WindowIcon, CodeBracketSquareIcon} from "@heroicons/react/24/solid";
 import {useState} from "react";
 import {getLang, Language, LanguagesKey} from "@/utils";
 import {projects} from "@/config";
+import {Code, Presentation} from "lucide-react";
+import Link from "next/link";
+
+export type ProjectType = {
+    title: string;
+    subtitle: string;
+    description: string;
+    backgroundImage: string;
+    backgroundImageSrc?: {
+        credit: string;
+        origin: string;
+    };
+    url?: string;
+    codeUrl?: string;
+    languages: {
+        percentage: number;
+        lang: LanguagesKey;
+    }[];
+};
 
 function ProjectsLanguage({percentage, lang, selected, vertical}: {
     percentage: number;
@@ -24,19 +42,19 @@ function ProjectsLanguage({percentage, lang, selected, vertical}: {
             <AnimatePresence>
                 {langVisisble && (
                     <motion.div
-                        className={`absolute ${vertical ? "top-1/2 -translate-y-1/2 translate-x-[70%]" : "top-0 -translate-y-[130%]"} bg-primary-3 text-white text-center px-3 py-1.5 rounded-xl z-50`}
+                        className={`absolute ${vertical ? "left-6 top-1/2 -translate-y-1/2" : "top-0 -translate-y-[130%]"} bg-primary-3 text-white text-center px-3 py-1.5 rounded-xl z-50 text-nowrap`}
                         initial={{opacity: 0}}
                         animate={{opacity: 1}}
                         exit={{opacity: 0}}
                     >
                         {vertical ? (
                             <div
-                                className="bg-primary-3 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full w-2 h-4"
+                                className="bg-primary-3 absolute left-0.5 top-1/2 -translate-y-1/2 -translate-x-full w-2 h-4"
                                 style={{clipPath: "polygon(100% 0, 100% 100%, 0 50%)"}}
                             />
                         ) : (
                             <div
-                                className="bg-primary-3 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-4 h-2"
+                                className="bg-primary-3 absolute bottom-0.5 left-1/2 -translate-x-1/2 translate-y-full w-4 h-2"
                                 style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}
                             />
                         )}
@@ -48,23 +66,14 @@ function ProjectsLanguage({percentage, lang, selected, vertical}: {
     );
 }
 
-function Project({title, subtitle, description, backgroundImage, url, codeUrl, languages, selected, onClick}: {
-    title: string;
-    subtitle: string;
-    description: string;
-    backgroundImage: string;
-    url?: string;
-    codeUrl?: string;
-    languages: {
-        percentage: number;
-        lang: LanguagesKey;
-    }[];
+function Project({projectData: {title, subtitle, description, backgroundImage, url, codeUrl, languages, backgroundImageSrc}, selected, onClick}: {
+    projectData: ProjectType;
     selected: boolean;
     onClick: () => void;
 }) {
     return (
         <motion.div
-            className={`relative grid ${!selected ? "content-end" : ""} md:justify-end grid-cols-[15px_auto] md:grid-cols-none md:grid-rows-[auto_20px] bg-white overflow-hidden w-full ${selected ? "h-full md:w-full" : "h-min md:w-min"} md:h-full ${selected ? "cursor-default" : "cursor-pointer"}`}
+            className={`relative grid ${!selected ? "content-end" : ""} md:justify-end grid-cols-[15px_auto] md:grid-cols-none md:grid-rows-[auto_20px] bg-white overflow-hidden w-full ${selected ? "h-full md:w-full" : "h-min md:w-min"} md:h-full ${selected ? "cursor-default" : "cursor-pointer"} min-w-12`}
             onClick={onClick}
             style={{
                 borderRadius: "12px",
@@ -96,7 +105,7 @@ function Project({title, subtitle, description, backgroundImage, url, codeUrl, l
             })}
             {!selected && (
                 <motion.aside
-                    className="relative flex text-lg md:text-xl whitespace-nowrap md:text-vertical md:rotate-180 pl-6 py-3 md:px-8 md:pb-4 items-center overflow-hidden"
+                    className="relative flex text-lg md:text-xl text-nowrap md:text-vertical md:rotate-180 pl-2 py-3 md:px-8 md:pb-4 items-center overflow-hidden"
                     initial={{opacity: 0}}
                     animate={{opacity: 1, transition: {delay: 0.5}}}
                     exit={{opacity: 0}}
@@ -119,19 +128,26 @@ function Project({title, subtitle, description, backgroundImage, url, codeUrl, l
                     <h2 className="text-xl md:text-3xl font-medium text-center mb-4 md:mb-8">{subtitle}</h2>
                     <p className="mb-4 font-light first-letter:ml-4 md:text-lg">{description}</p>
                     {url && (
-                        <a className="flex gap-2 text-secondary-1 mb-2 w-min whitespace-nowrap" href={url}
+                        <Link className="flex items-center gap-2 text-secondary-1 mb-2 w-min text-nowrap" href={url}
                            target="_blank">
-                            <WindowIcon className="h-5"/>
+                            <Presentation className="h-5"/>
                             Voir le projet
-                        </a>
+                        </Link>
                     )}
                     {codeUrl && (
-                        <a className="flex gap-2 text-secondary-1 w-min whitespace-nowrap" href={codeUrl}
+                        <Link className="flex items-center gap-2 text-secondary-1 w-min text-nowrap" href={codeUrl}
                            target="_blank">
-                            <CodeBracketSquareIcon className="h-5"/>
+                            <Code className="h-5"/>
                             Voir le code
-                        </a>
+                        </Link>
                     )}
+                    {backgroundImageSrc && <>
+                        <div className="grow min-h-4"/>
+                        <div className="flex flex-col text-neutral-500 text-center text-balance">
+                            <span>{backgroundImageSrc.credit}</span>
+                            <Link href={backgroundImageSrc.origin} target="_blank" className="underline">Source</Link>
+                        </div>
+                    </>}
                 </motion.article>
             )}
         </motion.div>
@@ -149,13 +165,7 @@ export default function Projects() {
             </div>
             <AnimatePresence>
                 {projects.map((project, i) => <Project
-                    title={project.title}
-                    subtitle={project.subtitle}
-                    description={project.description}
-                    backgroundImage={project.backgroundImage}
-                    url={project.url}
-                    codeUrl={project.codeUrl}
-                    languages={project.languages}
+                    projectData={project}
                     selected={selectedProject === i}
                     key={i}
                     onClick={() => setSelectedProject(i)}

@@ -1,9 +1,8 @@
-import "locomotive-scroll/dist/locomotive-scroll.css";
 import "./globals.css";
 import {Inter} from "next/font/google";
 import {AlertProvider} from "@/components/Alert";
 import {ReactNode} from "react";
-import ScrollProvider from "@/components/ScrollProvider";
+import {GoogleAnalytics} from "@next/third-parties/google";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -26,15 +25,18 @@ export default function RootLayout({
                                    }: {
     children: ReactNode
 }) {
+
+    const googleAnalyticsGa = process.env.GOOGLE_ANALYTICS_GA;
+    if (googleAnalyticsGa === undefined) throw new Error("GOOGLE_ANALYTICS_GA is required.");
+
     return (
-        <html lang="fr" style={{scrollBehavior: "smooth"}}>
+        <html lang="fr">
+        <GoogleAnalytics gaId={googleAnalyticsGa}/>
         <body className={inter.className}>
         <main>
-            <ScrollProvider>
-                <AlertProvider>
-                    {children}
-                </AlertProvider>
-            </ScrollProvider>
+            <AlertProvider>
+                {children}
+            </AlertProvider>
         </main>
         </body>
         </html>

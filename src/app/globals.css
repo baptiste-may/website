@@ -1,6 +1,14 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+
+@theme {
+    --color-primary-1: #02142A;
+    --color-primary-2: #001839;
+    --color-primary-3: #003379;
+    --color-secondary-1: #FB8500;
+    --color-secondary-2: #D87200;
+    --color-secondary-3: #A35600;
+    --font-sans: Inter, sans-serif;
+}
 
 @layer base {
     b {
@@ -8,14 +16,6 @@
     }
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-[data-scroll-container] {
-    overflow: hidden;
+@utility text-vertical {
+    writing-mode: vertical-lr;
 }

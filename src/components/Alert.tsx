@@ -9,7 +9,7 @@ import {
     useState
 } from "react";
 import {AnimatePresence, motion} from "framer-motion";
-import {XMarkIcon} from "@heroicons/react/24/outline";
+import { X } from "lucide-react";
 
 const alertContext = createContext<undefined | {
     alerts: Alert[],
@@ -60,7 +60,7 @@ export function AlertProvider({children}: {
                                     newAlert.splice(i, 1);
                                     setAlerts(newAlert);
                                 }}>
-                                <XMarkIcon
+                                <X
                                     className="w-full h-full p-2 text-gray-500 hover:text-gray-300 transition-all"/>
                             </button>
                         </motion.li>)}

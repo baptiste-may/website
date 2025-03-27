@@ -1,11 +1,11 @@
 export default function Input({type, placeholder, name, disabled = false}: {
     type: string;
     name: string;
-    placeholder: string;
+    placeholder?: string;
     disabled: boolean;
 }) {
 
-    const className = "w-full bg-[#00000040] border-2 border-white px-4 py-2 rounded-xl text-lg text-white resize-none outline-primary-3 disabled:opacity-50 disabled:cursor-not-allowed";
+    const className = "w-full bg-[#00000040] border border-white px-4 py-2 rounded-xl text-lg text-white resize-none outline-primary-3 disabled:opacity-50 disabled:cursor-not-allowed";
 
     if (type === "textarea") {
         return (

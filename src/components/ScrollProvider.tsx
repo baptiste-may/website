@@ -1,26 +1,35 @@
 "use client";
 
-import {LocomotiveScrollProvider} from "react-locomotive-scroll";
-import {ReactNode, useRef} from "react";
+import {ReactNode, useEffect, useRef} from "react";
+import "lenis/dist/lenis.css";
+import ReactLenis, {LenisRef} from "lenis/react";
+import {cancelFrame, frame} from "framer-motion";
 
 export default function ScrollProvider({children}: {
     children: ReactNode;
 }) {
-    const containerRef = useRef(null);
+
+    const lenisRef = useRef<LenisRef>(null)
+
+    useEffect(() => {
+        function update(data: {
+            timestamp: number;
+        }) {
+            const time = data.timestamp
+            lenisRef.current?.lenis?.raf(time);
+        }
+
+        frame.update(update, true);
+
+        return () => cancelFrame(update);
+    }, []);
+
     return (
-        <LocomotiveScrollProvider
-            options={{
-                smooth: true,
-                tablet: {smooth: true},
-                smartphone: {smooth: true},
-                log: false
-            }}
-            watch={[children]}
-            containerRef={containerRef}
-        >
-            <div ref={containerRef}>
-                {children}
-            </div>
-        </LocomotiveScrollProvider>
+        <ReactLenis options={{
+            autoRaf: false,
+            duration: 2
+        }} ref={lenisRef} root>
+            {children}
+        </ReactLenis>
     );
 }

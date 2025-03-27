@@ -1,28 +1,29 @@
 "use client";
 
-import UpButton from "../components/UpButton";
-import Section from "../components/Section";
-import Footer from "../components/Footer";
-import SectionTitle from "../components/SectionTitle";
-import Button from "../components/Button";
-import {ComputerDesktopIcon, ChatBubbleLeftRightIcon} from "@heroicons/react/24/solid";
-import Landing from "../sections/Landing";
-import AboutMe from "../sections/AboutMe";
-import Projects from "../sections/Projects";
-import Contact from "../sections/Contact";
+import UpButton from "@/components/UpButton";
+import Section from "@/components/Section";
+import Footer from "@/components/Footer";
+import SectionTitle from "@/components/SectionTitle";
+import Button from "@/components/Button";
+import Landing from "@/sections/Landing";
+import AboutMe from "@/sections/AboutMe";
+import Projects from "@/sections/Projects";
+import Contact from "@/sections/Contact";
 import {useState, useEffect} from "react";
 import {motion, AnimatePresence} from "framer-motion";
-import {useLocomotiveScroll} from "react-locomotive-scroll";
+import {LaptopMinimal, MessagesSquare} from "lucide-react";
+import {useLenis} from "lenis/react";
+import ScrollProvider from "@/components/ScrollProvider";
 
 export default function Home() {
 
-    const {scroll} = useLocomotiveScroll();
+    const lenis = useLenis();
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => setIsLoading(false), []);
 
     return (
-        <>
+        <ScrollProvider>
             <AnimatePresence>
                 {isLoading ? (
                     <motion.div
@@ -34,9 +35,7 @@ export default function Home() {
                     </motion.div>
                 ) : undefined}
             </AnimatePresence>
-            <UpButton onClick={() => {
-                if (scroll) scroll.scrollTo("#landing");
-            }}/>
+            <UpButton/>
             <div data-scroll-container={true}>
                 <Section dark full id="landing">
                     <Landing/>
@@ -45,9 +44,9 @@ export default function Home() {
                     <SectionTitle title="Qui suis-je ?" subtitle="Cliquez sur un événement pour en savoir plus"/>
                     <AboutMe/>
                     <Button onClick={() => {
-                        if (scroll) scroll.scrollTo("#projects");
+                        lenis?.scrollTo("#projects");
                     }}>
-                        <ComputerDesktopIcon className="w-5"/>
+                        <LaptopMinimal fill="white"/>
                         Voir des exemples
                     </Button>
                 </Section>
@@ -55,9 +54,9 @@ export default function Home() {
                     <SectionTitle title="Mes projets" subtitle="Sélectionnez un projet pour avoir plus d'informations"/>
                     <Projects/>
                     <Button onClick={() => {
-                        if (scroll) scroll.scrollTo("#contact");
+                        lenis?.scrollTo("#contact");
                     }}>
-                        <ChatBubbleLeftRightIcon className="w-5"/>
+                        <MessagesSquare fill="white"/>
                         Parlons ensemble
                     </Button>
                 </Section>
@@ -68,6 +67,6 @@ export default function Home() {
                 </Section>
                 <Footer/>
             </div>
-        </>
+        </ScrollProvider>
     );
 }

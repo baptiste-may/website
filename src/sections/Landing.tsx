@@ -1,27 +1,27 @@
 "use client";
 
-import {useState, useEffect} from 'react';
-import Button from '../components/Button';
-import {BookOpenIcon} from '@heroicons/react/24/solid';
-import Star from '../elements/star.svg';
-import Sun from '../elements/sun.svg';
-import Mountain1 from '../elements/mountain-1.svg';
-import Mountain2 from '../elements/mountain-2.svg';
-import Mountain3 from '../elements/mountain-3.svg';
-import Floor from '../elements/floor.svg';
-import BigFire1 from "../elements/big-fire-1.svg";
-import BigFire2 from "../elements/big-fire-2.svg";
-import BigFire3 from "../elements/big-fire-3.svg";
-import BigFire4 from "../elements/big-fire-4.svg";
-import BigFire5 from "../elements/big-fire-5.svg";
-import BigFire6 from "../elements/big-fire-6.svg";
-import LittleFire1 from "../elements/little-fire-1.svg";
-import LittleFire2 from "../elements/little-fire-2.svg";
-import LittleFire3 from "../elements/little-fire-3.svg";
-import Log1 from "../elements/log-1.svg";
-import Log2 from "../elements/log-2.svg";
-import {delay, random} from '@/utils';
-import {useLocomotiveScroll} from "react-locomotive-scroll";
+import {useState, useEffect} from "react";
+import Button from "@/components/Button";
+import Star from "@/elements/star.svg";
+import Sun from "@/elements/sun.svg";
+import Mountain1 from "@/elements/mountain-1.svg";
+import Mountain2 from "@/elements/mountain-2.svg";
+import Mountain3 from "@/elements/mountain-3.svg";
+import Floor from "@/elements/floor.svg";
+import BigFire1 from "@/elements/big-fire-1.svg";
+import BigFire2 from "@/elements/big-fire-2.svg";
+import BigFire3 from "@/elements/big-fire-3.svg";
+import BigFire4 from "@/elements/big-fire-4.svg";
+import BigFire5 from "@/elements/big-fire-5.svg";
+import BigFire6 from "@/elements/big-fire-6.svg";
+import LittleFire1 from "@/elements/little-fire-1.svg";
+import LittleFire2 from "@/elements/little-fire-2.svg";
+import LittleFire3 from "@/elements/little-fire-3.svg";
+import Log1 from "@/elements/log-1.svg";
+import Log2 from "@/elements/log-2.svg";
+import {delay, random, randomDeg, randomLongTime, randomPercentage, randomTime} from "@/utils";
+import {ChevronsDown} from "lucide-react";
+import {useLenis} from "lenis/react";
 
 const bigFires = [
     {
@@ -58,24 +58,6 @@ const bigFires = [
 const littleFires = [
     LittleFire1, LittleFire2, LittleFire3
 ];
-
-function randomPercentage() {
-    return `${Math.floor((Math.random() * 100))}%`;
-}
-
-function randomTime() {
-    return Math.floor((Math.random() * 3500) + 500);
-}
-
-function randomLongTime() {
-    return Math.floor((Math.random() * 4000) + 1000);
-}
-
-const maxAngle = 5;
-
-function randomDeg() {
-    return Math.floor((Math.random() * maxAngle * 2) - maxAngle);
-}
 
 function AnimatedStar({left, top}: {
     left: string;
@@ -123,7 +105,7 @@ function BigFire({SVG, top, left}: {
         const timing = randomTime();
         setRotationTime(timing);
         setTimeout(() => {
-            setRotation(randomDeg());
+            setRotation(randomDeg(5));
             setTimeout(changeRotation, timing);
         }, 1);
     }
@@ -176,7 +158,7 @@ function LittleFire({SVG}: {
 
 export default function Landing() {
 
-    const {scroll} = useLocomotiveScroll();
+    const lenis = useLenis();
 
     const [stars] = useState<{ left: string; top: string; }[]>([]);
     const [, setStarsReady] = useState(false);
@@ -239,9 +221,9 @@ export default function Landing() {
                 <Button
                     className="relative mt-8 shadow-[orange_0px_0px_15px_1px] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0"
                     onClick={() => {
-                        if (scroll) scroll.scrollTo("#about-me");
+                        lenis?.scrollTo("#about-me");
                     }}>
-                    <BookOpenIcon className="h-5"/>
+                    <ChevronsDown/>
                     Je veux en savoir plus !
                 </Button>
             </article>

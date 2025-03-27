@@ -6,7 +6,7 @@ Most of the inspiration come from [Outer Wilds](https://www.mobiusdigitalgames.c
 List of tools used :
 - [NextJS](https://nextjs.org)
 - [TailwindCSS](https://tailwindcss.com)
-- [Heroicons](https://heroicons.com)
+- [Lucide Icons](https://lucide.dev/icons)
 - [Framer Motion](https://www.framer.com/motion)
-- [Locomotive Scroll](https://locomotivemtl.github.io/locomotive-scroll)
+- [Lenis](https://lenis.darkroom.engineering)
 - [Nodemailer](https://nodemailer.com)
