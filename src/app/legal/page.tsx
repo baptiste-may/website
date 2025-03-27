@@ -1,10 +1,10 @@
-export function H1({content}: {
+function H1({content}: {
     content: string;
 }) {
     return <h1 className="font-bold text-4xl mt-8 mb-4 border-b text-center">{content}</h1>;
 }
 
-export function H2({content}: {
+function H2({content}: {
     content: string;
 }) {
     return <h2 className="font-bold text-2xl my-2">{content}</h2>;
