@@ -1,47 +1,4 @@
-export type Language = {
-    name: string;
-    color: string;
-};
-
-const LANGUAGES: Record<string, Language> = {
-    js: {
-        name: "JavaScript",
-        color: "#f1e05a"
-    },
-    ts: {
-        name: "TypeScript",
-        color: "#3178c6"
-    },
-    css: {
-        name: "CSS",
-        color: "#563d7c"
-    },
-    html: {
-        name: "HTML",
-        color: "#e34c26"
-    },
-    java: {
-        name: "Java",
-        color: "#b07219"
-    },
-    py: {
-        name: "Python",
-        color: "#3572A5"
-    }
-};
-
-const languages = Object.keys(LANGUAGES);
-export type LanguagesKey = typeof languages[number];
-
-/**
- * Return the language object given its key.
- *
- * @param lang - The language key.
- * @returns The language object.
- */
-export function getLang(lang: LanguagesKey) {
-    return LANGUAGES[lang];
-}
+import {useMediaQuery} from "react-responsive";
 
 /**
  * Returns a promise that resolves after a specified delay in milliseconds.
@@ -99,4 +56,16 @@ export function randomLongTime() {
  */
 export function randomDeg(maxAngle: number) {
     return random(-maxAngle, maxAngle);
+}
+
+/**
+ * Checks if the viewport is at least the specified breakpoint.
+ *
+ * @param breakpoint - The breakpoint to check (either "sm" or "lg").
+ * @returns A boolean indicating whether the viewport is at least the specified breakpoint.
+ */
+export function useBreakpoint(breakpoint: "sm" | "lg") {
+    return useMediaQuery({
+        query: `(min-width: ${breakpoint === "sm" ? 640 : 1024}px)`
+    });
 }

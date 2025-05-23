@@ -9,7 +9,7 @@ import {
     useState
 } from "react";
 import {AnimatePresence, motion} from "framer-motion";
-import { X } from "lucide-react";
+import {LucideIcon, X } from "lucide-react";
 
 const alertContext = createContext<undefined | {
     alerts: Alert[],
@@ -22,7 +22,7 @@ type Alert = {
     content: string;
     subcontent: string;
     type: AlertType;
-    Icon: any;
+    Icon: LucideIcon;
 };
 
 export function AlertProvider({children}: {

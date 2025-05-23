@@ -1,9 +1,15 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import {useState, useEffect, SVGProps, FC} from "react";
 import Button from "@/components/Button";
 import Star from "@/elements/star.svg";
 import Sun from "@/elements/sun.svg";
+import ViolinPlanet from "@/elements/violin-planet.svg";
+import Violin from "@/elements/violin.svg";
+import HTMLPlanet from "@/elements/html-planet.svg";
+import NifNafPlanet from "@/elements/nifnaf-planet.svg";
+import ReactPlanet from "@/elements/react-planet.svg";
+import NextPlanet from "@/elements/next-planet.svg";
 import Mountain1 from "@/elements/mountain-1.svg";
 import Mountain2 from "@/elements/mountain-2.svg";
 import Mountain3 from "@/elements/mountain-3.svg";
@@ -22,6 +28,7 @@ import Log2 from "@/elements/log-2.svg";
 import {delay, random, randomDeg, randomLongTime, randomPercentage, randomTime} from "@/utils";
 import {ChevronsDown} from "lucide-react";
 import {useLenis} from "lenis/react";
+import ToolTip from "@/components/ToolTip";
 
 const bigFires = [
     {
@@ -93,7 +100,7 @@ function AnimatedStar({left, top}: {
 }
 
 function BigFire({SVG, top, left}: {
-    SVG: any;
+    SVG: FC<SVGProps<SVGElement>>;
     top: number;
     left: number;
 }) {
@@ -123,7 +130,7 @@ function BigFire({SVG, top, left}: {
 }
 
 function LittleFire({SVG}: {
-    SVG: any;
+    SVG: FC<SVGProps<SVGElement>>;
 }) {
 
     const [top, setTop] = useState(400);
@@ -182,22 +189,64 @@ export default function Landing() {
             {/* BACKGROUND */}
             <div className="relative w-full h-full">
                 {/* STARS */}
-                <div className="relative w-full h-1/3">
+                <div className="relative w-full h-2/5">
                     {stars.map(({left, top}, i) => <AnimatedStar
                         key={i}
                         left={left}
                         top={top}
                     />)}
                 </div>
-                <Sun className="absolute md:top-[15%] top-[5%] md:left-[5%] w-[500px] h-[500px]"/>
-                <div className="absolute top-[11%] w-full flex flex-col">
+                <Sun className="absolute top-[35%] md:top-[20%] md:left-[5%] w-[500px] h-[500px]"/>
+                <ToolTip
+                    className="absolute left-1/6 top-[10%] -translate-1/2 lg:z-30"
+                    title="Violon" content="Depuis Septembre 2023, en plus de reprendre le solfège, j'apprends à **jouer du violon**.\nJ'avais déjà eu quelques années de solfège par le passé mais j'ai décidé de reprendre récemment.\n**La musique est un pilier dans ma vie.** En plus d'apprendre à jouer d'un instrument, j'ai la possiblité de jouer avec un ensemble."
+                >
+                    <div className="relative scale-50 md:scale-75 lg:scale-100">
+                        <ViolinPlanet/>
+                        <Violin className="absolute left-1/2 top-1/2 -translate-1/2"/>
+                    </div>
+                </ToolTip>
+                <ToolTip
+                    className="absolute left-2/6 top-[27%] md:top-[15%] -translate-1/2 lg:z-30"
+                    title="HTML" content="C'est grâce à l'HTML que je suis **tombé dans le monde du web**.\nJ'ai appris les bases en commençant par **ce language de balisage** pour réaliser un petit projet, celui de **faire un site pour le club robotique de mon collège**."
+                >
+                    <div className="relative scale-50 md:scale-75 lg:scale-100">
+                        <HTMLPlanet/>
+                    </div>
+                </ToolTip>
+                <ToolTip
+                    className="absolute left-3/6 top-[16%] md:top-[12%] -translate-1/2 lg:z-30" offset
+                    title="Compagnie Ni Fées Ni Affaires" content="Étant un fan de stage lighting, j'ai rejoins en 2023 la [compagnie Ni Fées Ni Affaires](https://www.cienifnaf.com), une **troupe de théâtre amateur** dont je participe en tant que **technicien**.\nEn plus d'avoir des **convictions proches**, j'y ai appris et j'apprend toujours beaucoup de choses."
+                >
+                    <div className="relative scale-50 md:scale-75 lg:scale-100">
+                        <NifNafPlanet/>
+                        <img src="/nifnaf.webp" alt="" className="absolute left-1/2 top-1/2 -translate-1/2"/>
+                    </div>
+                </ToolTip>
+                <ToolTip
+                    className="absolute left-4/6 top-[30%] md:top-[20%] -translate-1/2 lg:z-30"
+                    title="ReactJS" content="Premier framework web **appris en autodidacte**, ReactJS fut la base de mes **vrais premiers projets importants**.\nC'est notamment avec [NextJS](https://nextjs.org) que je réalise actuellement la plupart de mes projets."
+                >
+                    <div className="relative scale-50 md:scale-75 lg:scale-100">
+                        <ReactPlanet />
+                    </div>
+                </ToolTip>
+                <ToolTip
+                    className="absolute left-5/6 top-[10%] -translate-1/2 lg:z-30"
+                    title="NextJS" content="À ce jour, c'est le framework web full-stack que **j'utilise le plus**.\nIl propose à la fois une **simplicité de mise en place** et à la fois une **flexibilité des fonctionnalités**. Cela permet de **créer des applications de différentes tailles**, peu importe la complexité."
+                >
+                    <div className="relative scale-50 md:scale-75 lg:scale-100">
+                        <NextPlanet/>
+                    </div>
+                </ToolTip>
+                <div className="absolute top-[40%] md:top-[20%] lg:top-[16%] w-full flex flex-col">
                     <Mountain1 className="w-full"/>
                     <div className="relative -top-1 h-screen bg-primary-1"/>
                 </div>
-                <Mountain2 className="absolute w-full top-[25%]"/>
-                <Mountain3 className="absolute w-full top-[40%]"/>
+                <Mountain2 className="absolute w-full top-[48%] md:top-[35%] lg:top-[30%]"/>
+                <Mountain3 className="absolute w-full top-[55%] md:top-[45%]"/>
                 <div
-                    className="absolute w-full top-[70%] h-[30%] bg-primary-1 shadow-[0_10px_50px_10px_primary-1]"></div>
+                    className="absolute w-full top-[75%] h-[25%] bg-primary-1 shadow-[0_10px_50px_10px_primary-1]"></div>
                 <Floor className="absolute w-full top-3/4"/>
                 <div
                     className="absolute flex 2xl:hidden w-full h-full bg-primary-2 top-[calc(75%+50px)] md:top-[calc(75%+100px)] lg:top-[calc(75%+150px)]"></div>
@@ -212,14 +261,16 @@ export default function Landing() {
             </div>
             {/* TEXTS */}
             <article
-                className="absolute sm:left-[10%] left-1/2 -translate-x-1/2 sm:translate-x-0 top-1/2 -translate-y-1/2 w-min">
-                <h1 className="text-white text-7xl sm:text-8xl md:text-9xl font-bold mb-6 whitespace-nowrap lg:mt-40 drop-shadow-[0_0_2px_black]">{welcomeTitle}</h1>
-                <p className="text-white font-light text-xl drop-shadow-[0_0_2px_black]">
-                    <b>Bienvenue dans mon monde !</b> Je suis <b>Baptiste</b>, un jeune étudiant en informatique. Venez
-                    découvrir mes créations numériques captivantes, où <b>l'innovation rencontre l’originalité !</b>
+                className="absolute sm:left-[10%] left-1/2 -translate-x-1/2 sm:translate-x-0 top-1/2 -translate-y-1/2 w-min text-white font-light text-xl z-40 md:z-auto">
+                <h1 className="text-7xl sm:text-8xl md:text-9xl font-bold mb-6 lg:mt-40 text-shadow-lg/30 text-nowrap">{welcomeTitle}</h1>
+                <p className="text-balance text-shadow-lg/30 mb-2">
+                    <b>Bienvenue dans mon monde !</b> Je suis <b>Baptiste</b>, un jeune étudiant en informatique.
+                </p>
+                <p className="text-balance text-shadow-lg/30">
+                    Venez découvrir mes créations numériques captivantes, où <b>{`l'innovation rencontre l’originalité !`}</b>
                 </p>
                 <Button
-                    className="relative mt-8 shadow-[orange_0px_0px_15px_1px] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0"
+                    className="relative mt-8 shadow-[orange_0px_0px_15px_1px] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 font-medium"
                     onClick={() => {
                         lenis?.scrollTo("#about-me");
                     }}>

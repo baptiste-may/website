@@ -3,6 +3,7 @@ import {Inter} from "next/font/google";
 import {AlertProvider} from "@/components/Alert";
 import {ReactNode} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
+import {InteractiveImageProvider} from "@/components/InteractiveImage";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -35,7 +36,9 @@ export default function RootLayout({
         <body className={inter.className}>
         <main>
             <AlertProvider>
-                {children}
+                <InteractiveImageProvider>
+                    {children}
+                </InteractiveImageProvider>
             </AlertProvider>
         </main>
         </body>

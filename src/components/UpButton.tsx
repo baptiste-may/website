@@ -11,7 +11,7 @@ export default function UpButton() {
 
     return (
         <button
-            className="flex fixed right-4 bottom-4 items-center justify-center bg-primary-2 p-1 rounded-full border-2 border-white hover:primary-1 z-40 transition-all duration-500 cursor-pointer"
+            className="flex fixed right-4 bottom-4 items-center justify-center bg-primary-2 p-1 rounded-full border-2 border-white opacity-100 hover:opacity-75 z-40 transition-opacity cursor-pointer"
             onClick={() => lenis?.scrollTo("#landing")}
             style={{opacity: hidden ? 0 : 1}}
         >

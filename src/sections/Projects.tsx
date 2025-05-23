@@ -1,176 +1,144 @@
 import {AnimatePresence, motion} from "framer-motion";
-import {useState} from "react";
-import {getLang, Language, LanguagesKey} from "@/utils";
+import {Dispatch, SetStateAction, useState} from "react";
+import Button from "@/components/Button";
+import {
+    BriefcaseBusiness,
+    CalendarDays,
+    ClockFading,
+    CodeXml,
+    Hammer,
+    LucideIcon,
+    Presentation,
+    UsersRound,
+    X
+} from "lucide-react";
 import {projects} from "@/config";
-import {Code, Presentation} from "lucide-react";
-import Link from "next/link";
+import FormatedParagraph from "@/components/FormatedParagraph";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import {useBreakpoint} from "@/utils";
 
-export type ProjectType = {
+export type Project = {
     title: string;
     subtitle: string;
-    description: string;
-    backgroundImage: string;
-    backgroundImageSrc?: {
-        credit: string;
-        origin: string;
-    };
+    Icon: LucideIcon;
+    thumbnail: string;
+    code?: string;
     url?: string;
-    codeUrl?: string;
-    languages: {
-        percentage: number;
-        lang: LanguagesKey;
-    }[];
-};
-
-function ProjectsLanguage({percentage, lang, selected, vertical}: {
-    percentage: number;
-    lang: Language;
-    selected: boolean;
-    vertical: boolean;
-}) {
-
-    const {name, color} = lang;
-    const [langVisisble, setLangVisible] = useState(false);
-
-    return (
-        <div
-            className={`relative flex justify-center border-primary-3 h-[${percentage}%] ${langVisisble ? "border-2" : "border-0"}`}
-            style={{backgroundColor: color}}
-            onMouseEnter={() => setLangVisible(selected)}
-            onMouseLeave={() => setLangVisible(false)}
-        >
-            <AnimatePresence>
-                {langVisisble && (
-                    <motion.div
-                        className={`absolute ${vertical ? "left-6 top-1/2 -translate-y-1/2" : "top-0 -translate-y-[130%]"} bg-primary-3 text-white text-center px-3 py-1.5 rounded-xl z-50 text-nowrap`}
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
-                    >
-                        {vertical ? (
-                            <div
-                                className="bg-primary-3 absolute left-0.5 top-1/2 -translate-y-1/2 -translate-x-full w-2 h-4"
-                                style={{clipPath: "polygon(100% 0, 100% 100%, 0 50%)"}}
-                            />
-                        ) : (
-                            <div
-                                className="bg-primary-3 absolute bottom-0.5 left-1/2 -translate-x-1/2 translate-y-full w-4 h-2"
-                                style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}
-                            />
-                        )}
-                        {`${name} (${percentage}%)`}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
+    date: string;
+    duration: string;
+    job: string;
+    teamSize: string;
+    tools: string[];
+    details: string;
 }
 
-function Project({projectData: {title, subtitle, description, backgroundImage, url, codeUrl, languages, backgroundImageSrc}, selected, onClick}: {
-    projectData: ProjectType;
-    selected: boolean;
-    onClick: () => void;
+export function CardProject({id, onProjectSelected, data: {title, subtitle, thumbnail, Icon}}: {
+    id: number;
+    onProjectSelected: Dispatch<SetStateAction<null | number>>;
+    data: Project;
 }) {
     return (
         <motion.div
-            className={`relative grid ${!selected ? "content-end" : ""} md:justify-end grid-cols-[15px_auto] md:grid-cols-none md:grid-rows-[auto_20px] bg-white overflow-hidden w-full ${selected ? "h-full md:w-full" : "h-min md:w-min"} md:h-full ${selected ? "cursor-default" : "cursor-pointer"} min-w-12`}
-            onClick={onClick}
-            style={{
-                borderRadius: "12px",
-            }}
-            layout
-            transition={{layout: {duration: 0.5, ease: "easeInOut"}}}
+            className="relative w-full h-full bg-white rounded-xl scale-90 hover:scale-100 hover:z-20 bg-cover bg-center transition-all"
+            layoutId={`container-${id}`}
+            onClick={() => onProjectSelected(id)}
+            style={{backgroundImage: `url(${thumbnail})`}}
         >
-            {[false, true].map(b => {
-                const languagesString = languages.map(e => `${e.percentage}%`).join(" ");
-                return (
-                    <div
-                        className={`${b ? "grid md:hidden" : "md:grid hidden"} md:order-last ${selected && "cursor-help"}`}
-                        style={{
-                            gridTemplateRows: b ? languagesString : undefined,
-                            gridTemplateColumns: b ? undefined : languagesString
-                        }}
-                        key={b ? "vertical" : "horizontal"}
-                    >
-                        {languages.map(({percentage, lang}, i) =>
-                            <ProjectsLanguage
-                                percentage={percentage}
-                                lang={getLang(lang)}
-                                key={i}
-                                selected={selected}
-                                vertical={b}
-                            />)}
-                    </div>
-                );
-            })}
-            {!selected && (
-                <motion.aside
-                    className="relative flex text-lg md:text-xl text-nowrap md:text-vertical md:rotate-180 pl-2 py-3 md:px-8 md:pb-4 items-center overflow-hidden"
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1, transition: {delay: 0.5}}}
-                    exit={{opacity: 0}}
-                >
-                    {`${title} - ${subtitle}`}
-                </motion.aside>
-            )}
-            <div
-                className="absolute w-12 md:w-full md:h-12 h-full top-0 right-0 bg-gradient-to-r md:bg-gradient-to-t from-transparent to-white"/>
-            {selected && (
-                <motion.article
-                    className="relative flex flex-col py-4 px-6 md:px-16 overflow-y-auto"
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1, transition: {delay: 0.5}}}
-                    exit={{opacity: 0}}
-                >
-                    <div className="absolute left-0 top-0 w-full h-24 bg-cover bg-center"
-                         style={{backgroundImage: `url(${backgroundImage})`}}/>
-                    <h1 className="text-3xl md:text-5xl font-bold text-center mt-24 md:mt-32">{title}</h1>
-                    <h2 className="text-xl md:text-3xl font-medium text-center mb-4 md:mb-8">{subtitle}</h2>
-                    <p className="mb-4 font-light first-letter:ml-4 md:text-lg">{description}</p>
-                    {url && (
-                        <Link className="flex items-center gap-2 text-secondary-1 mb-2 w-min text-nowrap" href={url}
-                           target="_blank">
-                            <Presentation className="h-5"/>
-                            Voir le projet
-                        </Link>
-                    )}
-                    {codeUrl && (
-                        <Link className="flex items-center gap-2 text-secondary-1 w-min text-nowrap" href={codeUrl}
-                           target="_blank">
-                            <Code className="h-5"/>
-                            Voir le code
-                        </Link>
-                    )}
-                    {backgroundImageSrc && <>
-                        <div className="grow min-h-4"/>
-                        <div className="flex flex-col text-neutral-500 text-center text-balance">
-                            <span>{backgroundImageSrc.credit}</span>
-                            <Link href={backgroundImageSrc.origin} target="_blank" className="underline">Source</Link>
-                        </div>
-                    </>}
-                </motion.article>
-            )}
+            <button className="absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 bg-white p-2 rounded-full z-10 drop-shadow-2xl">
+                <Icon/>
+            </button>
+            <button className="flex flex-col items-center justify-center w-full h-full hover:backdrop-blur-lg opacity-0 hover:opacity-100 transition-all cursor-pointer rounded-xl">
+                <h1 className="font-bold text-2xl text-white text-shadow-lg/30">{title}</h1>
+                <h2 className="font-light text-lg text-neutral-300 text-shadow-lg/20">{subtitle}</h2>
+            </button>
         </motion.div>
     );
 }
 
 export default function Projects() {
 
-    const [selectedProject, setSelectedProject] = useState(0);
+    const [selectedProject, setSelectedProject] = useState<null | number>(null);
+    const sm = useBreakpoint("sm");
+    const lg = useBreakpoint("lg")
 
     return (
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full h-full px-4 overflow-hidden">
-            <div className="hidden">
-                {projects.map(({backgroundImage}, i) => <img src={backgroundImage} key={i} alt=""/>)}
+        <div className="relative w-full h-full px-4">
+            <div className="absolute grid grid-rows-8 grid-cols-1 sm:grid-rows-4 sm:grid-cols-2 lg:grid-rows-2 lg:grid-cols-4 left-[calc(50%_-_(var(--spacing)_*_13))] -translate-x-1/2 w-[calc(100vw_-_(var(--spacing)_*_8))] h-full mx-12">
+                {projects.map((data, index) =>
+                    <RevealOnScroll key={index} delay={(index % (lg ? 4 : sm ? 2 : 1)) / 4}>
+                        <CardProject id={index} onProjectSelected={setSelectedProject} data={data}/>
+                    </RevealOnScroll>)}
+                <AnimatePresence>
+                    {selectedProject !== null && (
+                        <motion.div
+                            layoutId={`container-${selectedProject}`}
+                            className="absolute left-0 top-0 bg-white rounded-xl w-full h-full z-20 bg-cover bg-center overflow-hidden"
+                            style={{backgroundImage: `url(${projects[selectedProject].thumbnail})`}}
+                        >
+                            <div className="flex items-center justify-center w-full h-full backdrop-blur-2xl">
+                                <div className="grid grid-rows-[auto_2px_auto] md:grid-rows-1 md:grid-cols-[40%_2px_auto] lg:grid-cols-[auto_2px_auto] border-2 border-white/90 bg-white/75 rounded-lg px-4 md:px-12 py-6 w-9/10 h-9/10 gap-2 md:gap-8 overflow-y-auto overflow-x-hidden">
+                                    <div className="relative flex flex-col">
+                                        <Button onClick={() => setSelectedProject(null)} className="fixed md:relative !w-8/10 md:!w-full !justify-center">
+                                            <X className="h-6"/>
+                                            {`Voir d'autres projets`}
+                                        </Button>
+                                        <h1 className="font-bold text-4xl mt-16 md:mt-8 text-center md:text-start">{projects[selectedProject].title}</h1>
+                                        <h2 className="flex gap-2 text-neutral-700 mb-4 text-center md:text-start">
+                                            {(() => {
+                                                const Icon = projects[selectedProject].Icon;
+                                                return <Icon/>;
+                                            })()}
+                                            {projects[selectedProject].subtitle}
+                                        </h2>
+                                        <div className="flex flex-row md:flex-col lg:flex-row gap-4 mt-0 mb-4 md:mb-6">
+                                            {projects[selectedProject].url && <Button
+                                                basic small href={projects[selectedProject].url}
+                                                className="!w-full !justify-center"
+                                            >
+                                                <Presentation className="h-6"/>
+                                                Voir le projet
+                                            </Button>}
+                                            {projects[selectedProject].code && <Button
+                                                basic small href={projects[selectedProject].code}
+                                                className="!w-full !justify-center"
+                                            >
+                                                <CodeXml className="h-6"/>
+                                                Voir le code
+                                            </Button>}
+                                        </div>
+                                        <ul className="flex flex-col ml-2 gap-1 md:gap-3">
+                                            <li className="flex items-center gap-2 text-lg">
+                                                <CalendarDays className="h-8"/>
+                                                {projects[selectedProject].date}
+                                            </li>
+                                            <li className="flex items-center gap-2 text-lg">
+                                                <ClockFading className="h-8"/>
+                                                {projects[selectedProject].duration}
+                                            </li>
+                                            <li className="flex items-center gap-2 text-lg">
+                                                <BriefcaseBusiness className="h-8"/>
+                                                {projects[selectedProject].job}
+                                            </li>
+                                            <li className="flex items-center gap-2 text-lg">
+                                                <UsersRound className="h-8"/>
+                                                {projects[selectedProject].teamSize}
+                                            </li>
+                                            <li className="flex items-center gap-2 text-lg">
+                                                <Hammer className="h-8"/>
+                                                {projects[selectedProject].tools.join(", ")}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="opacity-0 md:opacity-100 bg-black h-full rounded-full"/>
+                                    <FormatedParagraph className="md:py-4 md:overflow-y-auto">
+                                        {projects[selectedProject].details}
+                                    </FormatedParagraph>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
-            <AnimatePresence>
-                {projects.map((project, i) => <Project
-                    projectData={project}
-                    selected={selectedProject === i}
-                    key={i}
-                    onClick={() => setSelectedProject(i)}
-                />)}
-            </AnimatePresence>
         </div>
     );
 }

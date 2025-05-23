@@ -6,6 +6,7 @@ import DiscordLogo from "@/elements/discord-logo.svg";
 import {useAlert} from "@/components/Alert";
 import {Check, Mail, Network, Send, TriangleAlert} from "lucide-react";
 import Link from "next/link";
+import RevealOnScroll from "@/components/RevealOnScroll";
 
 function SNButton({url, img, alt}: {
     url: string;
@@ -32,15 +33,15 @@ function SocialNetworks() {
                 <div className="flex justify-around gap-4 md:gap-4">
                     <SNButton url="https://www.linkedin.com/in/baptiste-may-8706602a3"
                               img="/linkedin-logo.webp" alt="Linkedin"/>
+                    <SNButton url="https://github.com/baptiste-may"
+                              img="/github-logo.webp"
+                              alt="Github"/>
                     <SNButton url="https://bsky.app/profile/baptistemay.bsky.social"
                               img="/bluesky-logo.svg"
                               alt="Blue Sky"/>
-                    <SNButton url="https://www.facebook.com/baptiste.may.1"
-                              img="/facebook-logo.webp"
-                              alt="Facebook"/>
                 </div>
             </div>
-            <span className="text-slate-500 text-center font-sm font-light mx-4 mt-4 text-balance">N’oubliez pas un petit message pour vous départager des arnaqueurs !</span>
+            <span className="text-slate-500 text-center font-sm font-light mx-4 mt-4 text-balance w-2/3">N’oubliez pas un petit message pour vous départager des arnaqueurs !</span>
         </div>
     );
 }
@@ -54,10 +55,11 @@ function MailForm() {
         <form className="flex flex-col items-center mx-4 h-full" onSubmit={e => {
             e.preventDefault();
             setLockInput(true);
-            const data = {};
-            // @ts-ignore
-            for (const element of Object.values(e.target.elements)) {
-                // @ts-ignore
+            const data: Record<string, string> = {};
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            const elements: HTMLInputElement[] = Object.values(e.target.elements);
+            for (const element of elements) {
                 data[element.name] = element.value;
             }
             fetch("/sendMail", {
@@ -98,7 +100,7 @@ function MailForm() {
             <Input type="textarea" name="body" disabled={lockInput}/>
             <Button className="mt-4" disabled={lockInput}>
                 <Send fill="white"/>
-                J'envoie mon message
+                {`J'envoie mon message`}
             </Button>
         </form>
     );
@@ -110,7 +112,7 @@ export default function Contact() {
 
     return (
         <>
-            <div className="block lg:hidden h-full">
+            <RevealOnScroll className="block lg:hidden h-full">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={usingMail ? "mail" : "network"}
@@ -120,7 +122,7 @@ export default function Contact() {
                         className="flex flex-col items-center mx-4 h-full"
                     >
                         <h3 className="text-white text-center text-2xl font-bold my-0">{usingMail ? "Par mail" : "Via les réseaux"}</h3>
-                        <Button className="mt-0" onClick={() => setUsingMail(!usingMail)} basic>
+                        <Button className="mb-6 md:mb-10" onClick={() => setUsingMail(!usingMail)} basic>
                             {usingMail ? (
                                 <>
                                     <Network/>
@@ -136,8 +138,8 @@ export default function Contact() {
                         {usingMail ? <MailForm/> : <SocialNetworks/>}
                     </motion.div>
                 </AnimatePresence>
-            </div>
-            <div className="hidden lg:flex h-full gap-12">
+            </RevealOnScroll>
+            <RevealOnScroll className="hidden lg:flex h-full gap-12">
                 <div className="flex flex-col h-full gap-8">
                     <h3 className="text-white text-center text-5xl font-bold">Via les réseaux</h3>
                     <SocialNetworks/>
@@ -151,7 +153,7 @@ export default function Contact() {
                     <h3 className="text-white text-center text-5xl font-bold">Par mail</h3>
                     <MailForm/>
                 </div>
-            </div>
+            </RevealOnScroll>
         </>
     );
 }
