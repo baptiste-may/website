@@ -16,13 +16,17 @@ export default function Page() {
       <H1 content="Politique de Confidentialité" />
 
       <H2 content="Collecte des données" />
-      <p>{`Ce site utilise Umami, un service d'analyse web respectueux de la vie privée. Umami collecte des données anonymes sur l'utilisation du site, telles que les pages visitées, le temps passé sur chaque page et les tendances générales de navigation. Ces données sont utilisées uniquement pour analyser les tendances des utilisateurs et améliorer l'expérience utilisateur. Aucune information permettant d'identifier personnellement les utilisateurs n'est collectée, et aucun cookie de suivi n'est utilisé.`}</p>
+      <p>{`Ce site utilise Umami, un service d'analyse web respectueux de la vie privée. Umami collecte des données anonymes sur l'utilisation du site, telles que les pages visitées, le temps passé sur chaque page et les tendances générales de navigation. Ces données sont utilisées uniquement pour analyser les tendances des utilisateurs et améliorer l'expérience utilisateur. Umami ne collecte aucune information permettant d'identifier personnellement les utilisateurs, et aucun cookie de suivi n'est utilisé.`}</p>
 
       <H2 content="Finalité des données collectées" />
       <p>{`Les données collectées via Umami sont utilisées pour analyser le comportement des utilisateurs sur le site, améliorer l'expérience utilisateur et optimiser les performances du site. Ces données sont anonymisées et ne permettent pas d'identifier personnellement les utilisateurs.`}</p>
 
       <H2 content="Durée de conservation des données" />
       <p>{`Les données collectées par Umami sont conservées pour la durée strictement nécessaire à l'analyse de la fréquentation du site. Vous pouvez en demander la suppression à tout moment (voir « Droits des utilisateurs »).`}</p>
+
+      <H2 content="Hébergement et transfert des données" />
+      <p>{`Ce site est hébergé par Vercel Inc., dont les installations de traitement sont principalement situées aux États-Unis. Dans le cadre de l'hébergement, Vercel traite les données techniques nécessaires à la mise à disposition du site et à sa sécurité (adresse IP, date et heure de la requête, journaux serveur).`}</p>
+      <p>{`Cet hébergement implique un transfert de données en dehors de l'Union européenne. Baptiste MAY veille à ce que ce transfert soit encadré par des garanties appropriées au sens du RGPD : l'hébergeur s'engage notamment à appliquer les clauses contractuelles types de la Commission européenne (décision 2021/914) et à mettre en œuvre des mesures techniques et organisationnelles adaptées à la protection des données.`}</p>
 
       <H2 content="Droits des utilisateurs" />
       <p>
@@ -68,11 +72,11 @@ export default function Page() {
       <p>Téléphone : 07 68 12 05 91</p>
 
       <H2 content="Hébergeur du site" />
-      <p>IONOS SARL</p>
-      <p>7, place de la Gare, BP 70109</p>
-      <p>57200 Sarreguemines</p>
-      <p>France</p>
-      <p>Téléphone : 0970 808 911</p>
+      <p>Vercel Inc.</p>
+      <p>440 N Barranca Avenue #4133</p>
+      <p>Covina, CA 91723</p>
+      <p>États-Unis</p>
+      <p>Site web : https://vercel.com</p>
 
       <H2 content="Propriété intellectuelle" />
       <p>
