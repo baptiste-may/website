@@ -2,10 +2,8 @@ import nodemailer from "nodemailer";
 
 const {EMAIL_USER, EMAIL_PASSWORD} = process.env;
 const transporter = nodemailer.createTransport({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     host: "smtp.ionos.fr",
-    secureConnection: true,
+    secure: true,
     port: 465,
     auth: {
         user: EMAIL_USER,
