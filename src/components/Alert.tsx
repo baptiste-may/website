@@ -59,6 +59,7 @@ export function AlertProvider({ children }: { children: ReactNode }) {
               </div>
               <button
                 type="button"
+                aria-label="Fermer la notification"
                 className="flex items-center justify-center w-10 h-10 rounded-xl transition-all hover:bg-[#aaaaaa40]"
                 onClick={() =>
                   setAlerts((prev) => prev.filter((a) => a.id !== id))

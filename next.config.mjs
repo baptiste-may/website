@@ -1,3 +1,15 @@
+import os from "node:os";
+
+// Next.js only trusts the hostname the dev server was started on (localhost by
+// default). Testing from another device on the LAN means reaching this machine
+// by one of its own addresses, which changes with DHCP, so allow every
+// non-internal IPv4 address currently assigned. IPv6 is skipped: URL hostnames
+// keep the brackets (`[fe80::1]`), which would not match a bare address.
+const allowedDevOrigins = Object.values(os.networkInterfaces())
+  .flat()
+  .filter((iface) => iface?.family === "IPv4" && !iface.internal)
+  .map((iface) => iface.address);
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -44,6 +56,7 @@ const nextConfig = {
     },
   },
   reactStrictMode: false,
+  allowedDevOrigins,
 };
 
 export default nextConfig;

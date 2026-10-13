@@ -1,7 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { createContext, type ReactNode, useContext, useState } from "react";
+import { X } from "lucide-react";
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type Image =
   | {
@@ -20,13 +29,42 @@ export function InteractiveImageProvider({
   children: ReactNode;
 }) {
   const [image, setImage] = useState<Image>(undefined);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const openImage = useCallback((next: Image) => {
+    if (next !== undefined && document.activeElement instanceof HTMLElement) {
+      returnFocusRef.current = document.activeElement;
+    }
+    setImage(next);
+  }, []);
+
+  const closeImage = useCallback(() => {
+    setImage(undefined);
+    returnFocusRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (image === undefined) return;
+
+    closeButtonRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeImage();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [image, closeImage]);
+
   return (
-    <InteractiveImageContext.Provider value={setImage}>
+    <InteractiveImageContext.Provider value={openImage}>
       <AnimatePresence>
         {image !== undefined && (
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={image.title}
             className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/75 backdrop-blur-xl z-60 cursor-zoom-out overflow-hidden"
-            onClick={() => setImage(undefined)}
+            onClick={closeImage}
             initial={{ opacity: 0, dur: 0.75 }}
             animate={{ opacity: 1, dur: 0.75 }}
             exit={{ opacity: 0, dur: 0.75 }}
@@ -41,6 +79,18 @@ export function InteractiveImageProvider({
               animate={{ scale: 1 }}
               exit={{ scale: 0.25 }}
             />
+            <button
+              ref={closeButtonRef}
+              type="button"
+              aria-label="Fermer l'image"
+              className="flex absolute top-4 right-4 z-70 items-center justify-center w-12 h-12 rounded-xl transition-all hover:bg-[#aaaaaa40]"
+              onClick={(event) => {
+                event.stopPropagation();
+                closeImage();
+              }}
+            >
+              <X className="w-full h-full p-2 text-gray-300 hover:text-white transition-all" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
