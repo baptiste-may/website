@@ -4,7 +4,7 @@ const nextConfig = {
     // Find the file loader rule that handles SVGs
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
-    )
+    );
 
     config.module.rules.push(
       // Re-apply the existing rule, but only for svg imports ending in ?url
@@ -17,20 +17,22 @@ const nextConfig = {
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...(fileLoaderRule.resourceQuery?.not || []), /url/] }, // exclude if *.svg?url
+        resourceQuery: {
+          not: [...(fileLoaderRule.resourceQuery?.not || []), /url/],
+        }, // exclude if *.svg?url
         use: ["@svgr/webpack"],
       },
-    )
+    );
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i
+    fileLoaderRule.exclude = /\.svg$/i;
 
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
     };
 
-    return config
+    return config;
   },
   turbopack: {
     root: process.cwd(),
