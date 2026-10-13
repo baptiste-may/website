@@ -1,4 +1,4 @@
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 /**
  * Returns a promise that resolves after a specified delay in milliseconds.
@@ -7,7 +7,7 @@ import {useMediaQuery} from "react-responsive";
  * @returns A promise that resolves after the specified delay.
  */
 export function delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -18,7 +18,7 @@ export function delay(ms: number) {
  * @returns A random number between `min` and `max`.
  */
 export function random(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
@@ -27,7 +27,7 @@ export function random(min: number, max: number) {
  * @returns A random percentage value as a string.
  */
 export function randomPercentage() {
-    return `${random(0, 100)}%`;
+  return `${random(0, 100)}%`;
 }
 
 /**
@@ -36,7 +36,7 @@ export function randomPercentage() {
  * @returns A random time in milliseconds.
  */
 export function randomTime() {
-    return random(500, 4000);
+  return random(500, 4000);
 }
 
 /**
@@ -45,7 +45,7 @@ export function randomTime() {
  * @returns A random time in milliseconds.
  */
 export function randomLongTime() {
-    return random(1000, 5000);
+  return random(1000, 5000);
 }
 
 /**
@@ -55,7 +55,21 @@ export function randomLongTime() {
  * @returns A random degree value between `-maxAngle` and `maxAngle`.
  */
 export function randomDeg(maxAngle: number) {
-    return random(-maxAngle, maxAngle);
+  return random(-maxAngle, maxAngle);
+}
+
+/**
+ * Generates a random identifier string.
+ *
+ * Relies on `crypto.getRandomValues`, which (unlike `crypto.randomUUID`) is
+ * also available in insecure contexts such as a plain HTTP origin.
+ *
+ * @returns A random identifier string.
+ */
+export function randomId() {
+  return Array.from(crypto.getRandomValues(new Uint32Array(4)), (value) =>
+    value.toString(16).padStart(8, "0"),
+  ).join("");
 }
 
 /**
@@ -65,7 +79,7 @@ export function randomDeg(maxAngle: number) {
  * @returns A boolean indicating whether the viewport is at least the specified breakpoint.
  */
 export function useBreakpoint(breakpoint: "sm" | "lg") {
-    return useMediaQuery({
-        query: `(min-width: ${breakpoint === "sm" ? 640 : 1024}px)`
-    });
+  return useMediaQuery({
+    query: `(min-width: ${breakpoint === "sm" ? 640 : 1024}px)`,
+  });
 }
