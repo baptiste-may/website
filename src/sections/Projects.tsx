@@ -10,7 +10,8 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { useUmami } from "next-umami";
+import { useState } from "react";
 import Button from "@/components/Button";
 import FormatedParagraph from "@/components/FormatedParagraph";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -38,7 +39,7 @@ export function CardProject({
   data: { title, subtitle, thumbnail, Icon },
 }: {
   id: number;
-  onProjectSelected: Dispatch<SetStateAction<null | number>>;
+  onProjectSelected: (id: number) => void;
   data: Project;
 }) {
   return (
@@ -73,6 +74,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<null | number>(null);
   const sm = useBreakpoint("sm");
   const lg = useBreakpoint("lg");
+  const { event } = useUmami();
 
   return (
     <div className="relative w-full h-full px-4">
@@ -84,7 +86,10 @@ export default function Projects() {
           >
             <CardProject
               id={index}
-              onProjectSelected={setSelectedProject}
+              onProjectSelected={(id) => {
+                event("project-open", { project: projects[id].title });
+                setSelectedProject(id);
+              }}
               data={data}
             />
           </RevealOnScroll>
@@ -102,7 +107,12 @@ export default function Projects() {
                 <div className="grid grid-rows-[auto_2px_auto] md:grid-rows-1 md:grid-cols-[40%_2px_auto] lg:grid-cols-[auto_2px_auto] border-2 border-white/90 bg-white/75 rounded-lg px-4 md:px-12 py-6 w-9/10 h-9/10 gap-2 md:gap-8 overflow-y-auto overflow-x-hidden">
                   <div className="relative flex flex-col">
                     <Button
-                      onClick={() => setSelectedProject(null)}
+                      onClick={() => {
+                        event("project-close", {
+                          project: projects[selectedProject].title,
+                        });
+                        setSelectedProject(null);
+                      }}
                       className="fixed md:relative !w-8/10 md:!w-full !justify-center"
                     >
                       <X className="h-6" />
@@ -124,6 +134,12 @@ export default function Projects() {
                           basic
                           small
                           href={projects[selectedProject].url}
+                          onClick={() =>
+                            event("project-link", {
+                              project: projects[selectedProject].title,
+                              link: "site",
+                            })
+                          }
                           className="!w-full !justify-center"
                         >
                           <Presentation className="h-6" />
@@ -135,6 +151,12 @@ export default function Projects() {
                           basic
                           small
                           href={projects[selectedProject].code}
+                          onClick={() =>
+                            event("project-link", {
+                              project: projects[selectedProject].title,
+                              link: "code",
+                            })
+                          }
                           className="!w-full !justify-center"
                         >
                           <CodeXml className="h-6" />

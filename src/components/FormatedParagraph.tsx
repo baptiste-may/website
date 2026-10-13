@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useUmami } from "next-umami";
 import type { ReactNode } from "react";
 import { useInteractiveImage } from "@/components/InteractiveImage";
 
@@ -9,6 +10,7 @@ const boldRegex = /\*\*([^*]+)\*\*/g;
 
 function InteractiveImage({ src, title }: { src: string; title: string }) {
   const setImage = useInteractiveImage();
+  const { event } = useUmami();
 
   return (
     <div className="flex flex-col w-fit mx-auto">
@@ -16,12 +18,13 @@ function InteractiveImage({ src, title }: { src: string; title: string }) {
         type="button"
         className="rounded-lg cursor-pointer"
         aria-label={title}
-        onClick={() =>
+        onClick={() => {
+          event("image-open", { title });
           setImage({
             src,
             title,
-          })
-        }
+          });
+        }}
       >
         {/* biome-ignore lint/performance/noImgElement: dynamic content image with unknown intrinsic size */}
         <img

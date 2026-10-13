@@ -16,16 +16,13 @@ export default function Page() {
       <H1 content="Politique de Confidentialité" />
 
       <H2 content="Collecte des données" />
-      <p>{`Ce site utilise Google Analytics, un service d'analyse web fourni par Google Inc. Google Analytics collecte des données anonymes sur l'utilisation du site, telles que les pages visitées, le temps passé sur chaque page et les tendances générales de navigation. Ces données sont utilisées uniquement pour analyser les tendances des utilisateurs et améliorer l'expérience utilisateur. Aucune information permettant d'identifier personnellement les utilisateurs n'est collectée.`}</p>
+      <p>{`Ce site utilise Umami, un service d'analyse web respectueux de la vie privée. Umami collecte des données anonymes sur l'utilisation du site, telles que les pages visitées, le temps passé sur chaque page et les tendances générales de navigation. Ces données sont utilisées uniquement pour analyser les tendances des utilisateurs et améliorer l'expérience utilisateur. Aucune information permettant d'identifier personnellement les utilisateurs n'est collectée, et aucun cookie de suivi n'est utilisé.`}</p>
 
       <H2 content="Finalité des données collectées" />
-      <p>{`Les données collectées via Google Analytics sont utilisées pour analyser le comportement des utilisateurs sur le site, améliorer l'expérience utilisateur et optimiser les performances du site. Ces données sont anonymisées et ne permettent pas d'identifier personnellement les utilisateurs.`}</p>
+      <p>{`Les données collectées via Umami sont utilisées pour analyser le comportement des utilisateurs sur le site, améliorer l'expérience utilisateur et optimiser les performances du site. Ces données sont anonymisées et ne permettent pas d'identifier personnellement les utilisateurs.`}</p>
 
       <H2 content="Durée de conservation des données" />
-      <p>
-        Les données collectées par Google Analytics sont conservées pendant une
-        durée de 14 mois, conformément aux recommandations du RGPD.
-      </p>
+      <p>{`Les données collectées par Umami sont conservées pour la durée strictement nécessaire à l'analyse de la fréquentation du site. Vous pouvez en demander la suppression à tout moment (voir « Droits des utilisateurs »).`}</p>
 
       <H2 content="Droits des utilisateurs" />
       <p>

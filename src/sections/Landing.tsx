@@ -2,6 +2,7 @@
 
 import { useLenis } from "lenis/react";
 import { ChevronsDown } from "lucide-react";
+import { useUmami } from "next-umami";
 import { type FC, type SVGProps, useEffect, useState } from "react";
 import Button from "@/components/Button";
 import ToolTip from "@/components/ToolTip";
@@ -178,6 +179,7 @@ function LittleFire({ SVG }: { SVG: FC<SVGProps<SVGElement>> }) {
 
 export default function Landing() {
   const lenis = useLenis();
+  const { event } = useUmami();
 
   const [stars] = useState<{ left: string; top: string }[]>([]);
   const [, setStarsReady] = useState(false);
@@ -303,6 +305,7 @@ export default function Landing() {
         <Button
           className="relative mt-8 shadow-[orange_0px_0px_15px_1px] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 font-medium"
           onClick={() => {
+            event("landing-discover", { target: "about-me" });
             lenis?.scrollTo("#about-me");
           }}
         >

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useUmami } from "next-umami";
 import { type ReactNode, useState } from "react";
 import FormatedParagraph from "@/components/FormatedParagraph";
 
@@ -16,12 +17,16 @@ export default function ToolTip({
   offset?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { event } = useUmami();
 
   return (
     <motion.div
       className={`rounded-full ${className}`}
       whileHover={{ scale: 1.1 }}
-      onMouseEnter={() => setIsOpen(true)}
+      onMouseEnter={() => {
+        setIsOpen(true);
+        event("planet-open", { planet: title });
+      }}
       onMouseLeave={() => setIsOpen(false)}
     >
       <AnimatePresence>

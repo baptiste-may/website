@@ -1,6 +1,6 @@
 import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
+import UmamiProvider from "next-umami";
 import type { ReactNode } from "react";
 import { AlertProvider } from "@/components/Alert";
 import { InteractiveImageProvider } from "@/components/InteractiveImage";
@@ -24,13 +24,23 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const googleAnalyticsGa = process.env.GOOGLE_ANALYTICS_GA;
-  if (googleAnalyticsGa === undefined)
-    throw new Error("GOOGLE_ANALYTICS_GA is required.");
+  const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
+  const umamiScriptUrl = process.env.UMAMI_SCRIPT_URL;
+  if (umamiWebsiteId === undefined)
+    throw new Error("UMAMI_WEBSITE_ID is required.");
+  if (umamiScriptUrl === undefined)
+    throw new Error("UMAMI_SCRIPT_URL is required.");
 
   return (
     <html lang="fr">
-      <GoogleAnalytics gaId={googleAnalyticsGa} />
+      <head>
+        <UmamiProvider
+          websiteId={umamiWebsiteId}
+          src={umamiScriptUrl}
+          domains={["may-baptiste.fr"]}
+          performance
+        />
+      </head>
       <body className={inter.className}>
         <main>
           <AlertProvider>

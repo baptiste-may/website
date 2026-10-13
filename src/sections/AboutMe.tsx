@@ -8,6 +8,7 @@ import {
   MapPin,
 } from "lucide-react";
 import Link from "next/link";
+import { useUmami } from "next-umami";
 import { useState } from "react";
 import FormatedParagraph from "@/components/FormatedParagraph";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -34,6 +35,7 @@ export default function AboutMe() {
   const [event, setEvent] = useState<EventType>(events[events.length - 1]);
   const [index, setIndex] = useState(events.length - 1);
   const [movingCard, setMovingCard] = useState(0);
+  const umami = useUmami();
 
   return (
     <RevealOnScroll className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-4 px-8 lg:px-0 overflow-hidden">
@@ -71,6 +73,7 @@ export default function AboutMe() {
             className={`relative py-[10%] text-white hover:text-neutral-400 after:text-white text-end pr-12 -left-1/6 after:content-[" "] after:absolute after:border-4 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:right-0 after:translate-x-1/2 transition-all duration-500 after:transition-all after:duration-500 ${event.date === e.date ? "text-4xl font-bold after:w-16 after:h-16 after:bg-primary-3" : "text-2xl after:w-8 after:h-8 after:bg-primary-1"} cursor-pointer`}
             key={e.date}
             onClick={() => {
+              umami.event("aboutme-timeline", { date: e.date, title: e.title });
               setMovingCard(0);
               setTimeout(() => {
                 setEvent(events[i]);
@@ -157,6 +160,7 @@ export default function AboutMe() {
           <button
             type="button"
             onClick={() => {
+              umami.event("aboutme-navigate", { direction: "previous" });
               setMovingCard(-1);
               setTimeout(() => {
                 const newIndex = index - 1 < 0 ? events.length - 1 : index - 1;
@@ -176,6 +180,7 @@ export default function AboutMe() {
           <button
             type="button"
             onClick={() => {
+              umami.event("aboutme-navigate", { direction: "next" });
               setMovingCard(1);
               setTimeout(() => {
                 const newIndex = index + 1 >= events.length ? 0 : index + 1;

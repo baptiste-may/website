@@ -57,8 +57,8 @@ memory.
   declared in `src/app/globals.css` via `@theme` / `@utility`. Add colors there
   (e.g. `--color-primary-1` → `bg-primary-1`).
 - `reactStrictMode: false` in `next.config.mjs` is intentional — don't "fix" it.
-- Env vars (`.env`, gitignored): `GOOGLE_ANALYTICS_GA` is **required** —
-  `src/app/layout.tsx` throws at render if missing. `EMAIL_USER` /
+- Env vars (`.env`, gitignored): `UMAMI_WEBSITE_ID` and `UMAMI_SCRIPT_URL` are
+  **required** — `src/app/layout.tsx` throws at render if missing. `EMAIL_USER` /
   `EMAIL_PASSWORD` drive `sendMail` (IONOS SMTP, `smtp.ionos.fr:465`).
-  `.env.example` (committed) documents the three variables; keep it in sync when
+  `.env.example` (committed) documents the variables; keep it in sync when
   adding or removing one.

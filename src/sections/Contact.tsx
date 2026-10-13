@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Mail, Network, Send, TriangleAlert } from "lucide-react";
 import Link from "next/link";
+import { useUmami } from "next-umami";
 import { useState } from "react";
 import { useAlert } from "@/components/Alert";
 import Button from "@/components/Button";
@@ -18,10 +19,13 @@ function SNButton({
   img: string;
   alt: string;
 }) {
+  const { event } = useUmami();
+
   return (
     <Link
       href={url}
       target="_blank"
+      onClick={() => event("contact-social", { network: alt })}
       className="bg-white rounded-xl hover:opacity-75 transition-all"
     >
       {/* biome-ignore lint/performance/noImgElement: small static logo inside a fixed-size container */}
@@ -66,6 +70,7 @@ function SocialNetworks() {
 function MailForm() {
   const [lockInput, setLockInput] = useState(false);
   const { setAlerts } = useAlert();
+  const { event } = useUmami();
 
   return (
     <form
@@ -87,6 +92,7 @@ function MailForm() {
           body: JSON.stringify(data),
         }).then((res) => {
           if (res.ok) {
+            event("contact-submit", { status: "success" });
             setAlerts((prev) =>
               prev.concat({
                 id: randomId(),
@@ -97,6 +103,7 @@ function MailForm() {
               }),
             );
           } else {
+            event("contact-submit", { status: "error" });
             setAlerts((prev) =>
               prev.concat({
                 id: randomId(),
@@ -159,6 +166,7 @@ function MailForm() {
 
 export default function Contact() {
   const [usingMail, setUsingMail] = useState(false);
+  const { event } = useUmami();
 
   return (
     <>
@@ -176,7 +184,12 @@ export default function Contact() {
             </h3>
             <Button
               className="mb-6 md:mb-10"
-              onClick={() => setUsingMail(!usingMail)}
+              onClick={() => {
+                event("contact-mode", {
+                  mode: usingMail ? "networks" : "mail",
+                });
+                setUsingMail(!usingMail);
+              }}
               basic
             >
               {usingMail ? (
