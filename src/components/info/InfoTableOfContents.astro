@@ -1,0 +1,20 @@
+---
+type Props = { sections: { id: string; label: string }[] };
+
+const { sections } = Astro.props;
+---
+
+<nav aria-labelledby="toc-title" class="card bg-base-200 shadow-xl">
+  <div class="card-body gap-3">
+    <h2 id="toc-title" class="card-title text-xl">
+      Sommaire
+    </h2>
+    <ul class="menu w-full gap-1 p-0">
+      {sections.map((section) => (
+        <li>
+          <a href={`#${section.id}`}>{section.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>

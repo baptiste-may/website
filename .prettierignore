@@ -1,0 +1,12 @@
+.astro
+.data
+.sanity
+dist
+node_modules
+public
+bun.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+schema.json
+src/types/sanity-typegen.d.ts

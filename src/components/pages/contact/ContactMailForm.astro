@@ -1,0 +1,129 @@
+---
+import { Mail, Send } from "@lucide/astro";
+---
+
+<form
+  class="card bg-base-200 shadow-xl"
+  method="post"
+  action="/api/contact"
+  accept-charset="UTF-8"
+  aria-labelledby="contact-mail-title"
+>
+  <div class="card-body">
+    <h2 id="contact-mail-title" class="mb-4 card-title text-2xl">
+      <Mail aria-hidden="true" />
+      Par mail
+    </h2>
+    <p class="mb-2">Tous les champs sont obligatoires.</p>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="fieldset">
+        <label class="label" for="mail-last-name">
+          Nom
+        </label>
+        <input
+          id="mail-last-name"
+          name="nom"
+          type="text"
+          class="validator input w-full"
+          autocomplete="family-name"
+          maxlength="100"
+          required
+          aria-describedby="mail-last-name-hint"
+        />
+        <p id="mail-last-name-hint" class="validator-hint">
+          Saisissez votre nom.
+        </p>
+      </div>
+      <div class="fieldset">
+        <label class="label" for="mail-first-name">
+          Prénom
+        </label>
+        <input
+          id="mail-first-name"
+          name="prenom"
+          type="text"
+          class="validator input w-full"
+          autocomplete="given-name"
+          maxlength="100"
+          required
+          aria-describedby="mail-first-name-hint"
+        />
+        <p id="mail-first-name-hint" class="validator-hint">
+          Saisissez votre prénom.
+        </p>
+      </div>
+    </div>
+    <div class="fieldset">
+      <label class="label" for="mail-email">
+        E-mail
+      </label>
+      <input
+        id="mail-email"
+        name="email"
+        type="email"
+        class="validator input w-full"
+        autocomplete="email"
+        autocapitalize="none"
+        spellcheck="false"
+        maxlength="254"
+        required
+        aria-describedby="mail-email-hint"
+      />
+      <p id="mail-email-hint" class="validator-hint">
+        Saisissez une adresse e-mail valide.
+      </p>
+    </div>
+    <div class="fieldset">
+      <label class="label" for="mail-subject">
+        Sujet
+      </label>
+      <input
+        id="mail-subject"
+        name="sujet"
+        type="text"
+        class="validator input w-full"
+        autocomplete="off"
+        maxlength="150"
+        required
+        aria-describedby="mail-subject-hint"
+      />
+      <p id="mail-subject-hint" class="validator-hint">
+        Saisissez un sujet.
+      </p>
+    </div>
+    <div class="fieldset">
+      <label class="label" for="mail-message">
+        Message
+      </label>
+      <textarea
+        id="mail-message"
+        name="message"
+        rows="6"
+        class="validator textarea w-full"
+        maxlength="5000"
+        required
+        aria-describedby="mail-message-hint"
+      ></textarea>
+      <p id="mail-message-hint" class="validator-hint">
+        Saisissez votre message.
+      </p>
+    </div>
+    <div class="hidden">
+      <label for="mail-website">Site web</label>
+      <input id="mail-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <button type="submit" class="btn btn-primary">
+        <Send aria-hidden="true" />
+        Envoyer
+      </button>
+      <p class="max-w-sm text-sm">
+        Vos données servent uniquement à répondre à votre message.{" "}
+        <a class="link" href="/info#privacy">
+          Politique de confidentialité
+        </a>
+        .
+      </p>
+    </div>
+  </div>
+</form>

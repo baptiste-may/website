@@ -1,0 +1,26 @@
+---
+import NavigationDrawerContent from "@/components/navigation/drawer/NavigationDrawerContent.astro";
+import { drawerName } from "@/types/navigation.ts";
+---
+
+<div class="drawer drawer-end">
+  <input
+    id={drawerName}
+    type="checkbox"
+    class="drawer-toggle"
+    aria-label="Ouvrir le menu de navigation"
+  />
+  <div class="drawer-content">
+    {/* Page content here */}
+    <slot />
+  </div>
+  <div class="drawer-side">
+    {/* Astro's audit reads `innerText`, which ignores content hidden via `visibility`; `visible` keeps the text detectable without changing the UI. */}
+    <label for={drawerName} aria-label="Fermer le menu" class="drawer-overlay">
+      <span class="visible sr-only" aria-hidden="true">
+        Fermer le menu
+      </span>
+    </label>
+    <NavigationDrawerContent />
+  </div>
+</div>

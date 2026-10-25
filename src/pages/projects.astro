@@ -1,0 +1,18 @@
+---
+import { sanityClient } from "sanity:client";
+
+import ProjectsRow from "@/components/pages/projects/ProjectsRow.astro";
+import Layout from "@/layouts/default.astro";
+import { PROJECTS_QUERY } from "@/queries/projects";
+import type { PROJECTS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+const projects = await sanityClient.fetch<PROJECTS_QUERY_RESULT>(PROJECTS_QUERY);
+---
+
+<Layout title="Projets" description="Projets et réalisations de May Baptiste.">
+  <div class="flex w-full flex-col gap-4">
+    {projects.map((project, index) => (
+      <ProjectsRow project={project} index={index} />
+    ))}
+  </div>
+</Layout>

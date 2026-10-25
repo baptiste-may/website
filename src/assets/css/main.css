@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "./controls.css";
+
+@plugin "daisyui" {
+  themes: retro --default;
+}
+
+@theme {
+  --breakpoint-sm: 34rem;
+  --breakpoint-md: 50rem;
+}
+
+:root {
+  color-scheme: light;
+
+  --color-accent-content: oklch(10% 0 0);
+  --color-info-content: oklch(10% 0 0);
+  --color-warning-content: oklch(10% 0 0);
+  --color-error-content: oklch(10% 0 0);
+}
+
+.menu {
+  --menu-active-bg: var(--color-primary);
+  --menu-active-fg: var(--color-primary-content);
+}
+
+.label {
+  color: var(--color-base-content);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-base-content);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  color: var(--color-base-content);
+  background-color: var(--color-base-100);
+  border-radius: var(--radius-box);
+  box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.35);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

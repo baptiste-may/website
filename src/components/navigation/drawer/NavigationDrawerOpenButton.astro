@@ -1,0 +1,12 @@
+---
+import { drawerName } from "@/types/navigation.ts";
+
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+---
+
+<label for={drawerName} class:list={["drawer-button", className]}>
+  <slot />
+  <span class="sr-only">Ouvrir le menu</span>
+</label>

@@ -1,0 +1,15 @@
+---
+type Props = astroHTML.JSX.AnchorHTMLAttributes;
+
+const { class: className, href, rel, ...props } = Astro.props;
+const isExternal = typeof href === "string" && /^https?:\/\//.test(href);
+---
+
+<a
+  {...props}
+  href={href}
+  rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+  class:list={["link", className]}
+>
+  <slot />
+</a>

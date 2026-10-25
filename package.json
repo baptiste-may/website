@@ -1,0 +1,85 @@
+{
+  "name": "may_baptiste_website",
+  "type": "module",
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "typegen": "sanity schema extract --enforce-required-fields --force && sanity typegen generate",
+    "typecheck": "astro check",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "bun run format:check && bun run typegen && bun run lint && bun run typecheck && bun run build",
+    "postinstall": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bunx lint-staged"
+  },
+  "lint-staged": {
+    "*.{astro,js,jsx,ts,tsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.4.2",
+    "@astrojs/markdown-satteri": "^0.4.5",
+    "@astrojs/mdx": "^8.1.1",
+    "@astrojs/sitemap": "^3.7.4",
+    "@lucide/astro": "^1.61.0",
+    "@sanity/astro": "^3.5.1",
+    "@sanity/client": "^8.6.2",
+    "@sanity/color-input": "^6.1.5",
+    "@sanity/orderable-document-list": "^2.0.25",
+    "@sanity/ui": "^4.3.3",
+    "@sanity/vision": "^6.20.0",
+    "astro": "^7.4.2",
+    "astro-seo": "^1.2.0",
+    "color2k": "^2.0.4",
+    "daisyui": "^5.7.42",
+    "groq": "^5.31.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-is": "^19.3.0",
+    "sanity": "^6.20.0",
+    "styled-components": "^6.5.3",
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@eslint/js": "^10.0.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@sanity/cli": "^8.14.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-better-tailwindcss": "^4.10.0",
+    "eslint-plugin-jsx-a11y-x": "^0.2.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.13.0",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.2",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "simple-git-hooks": "^2.14.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.4",
+    "wrangler": "^4.152.0"
+  },
+  "patchedDependencies": {
+    "lexorank@1.0.5": "patches/lexorank@1.0.5.patch"
+  }
+}

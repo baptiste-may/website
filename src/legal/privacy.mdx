@@ -1,0 +1,117 @@
+import InfoLink from "@/components/info/InfoLink.astro";
+import InfoSection from "@/components/info/InfoSection.astro";
+import { legal } from "@/types/legal.ts";
+
+La présente politique décrit la manière dont vos données personnelles sont traitées lorsque vous utilisez le site {legal.siteName}, conformément au <abbr title="Règlement général sur la protection des données">RGPD</abbr> et à la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.
+
+<InfoSection id="privacy-controller-title" title="Responsable du traitement">
+
+Le responsable du traitement est <strong>{legal.publisher.fullName}</strong>, éditeur du site, joignable à l'adresse <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> ou au <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink>.
+
+Aucun délégué à la protection des données (DPO) n'a été désigné, le traitement ne le nécessitant pas. Les demandes relatives aux données personnelles sont traitées directement par le responsable du traitement.
+
+</InfoSection>
+
+<InfoSection id="privacy-data-title" title="Données collectées">
+
+Deux catégories de données peuvent être traitées :
+
+- **Données transmises via le formulaire de contact :** nom, prénom, adresse e-mail, sujet et contenu du message.
+- **Données techniques :** adresse IP, date et heure de la requête, URL demandée, type de navigateur et données de journal nécessaires à la sécurité et au fonctionnement du site.
+
+Les champs du formulaire sont obligatoires pour permettre le traitement de votre demande. Si vous ne les renseignez pas, aucune réponse ne pourra vous être apportée. Le numéro de téléphone n'est pas demandé par le formulaire.
+
+Aucune donnée sensible (santé, origine, opinions politiques ou religieuses, etc.) n'est demandée. Merci de ne pas en communiquer via le formulaire. Un champ caché destiné à détecter les robots est présent ; il ne doit pas être rempli et son contenu n'est pas utilisé pour vous identifier.
+
+Les données collectées proviennent directement de vous, lorsque vous remplissez le formulaire ou consultez le site. Aucune donnée n'est achetée ou obtenue auprès de tiers.
+
+</InfoSection>
+
+<InfoSection id="privacy-purposes-title" title="Finalités du traitement">
+
+- Répondre à votre message et assurer le suivi des échanges.
+- Assurer la sécurité du site, prévenir le spam, les abus et les attaques.
+- Respecter les obligations légales et répondre aux réquisitions des autorités compétentes.
+
+Vos données ne sont utilisées ni pour de la prospection commerciale, ni pour une newsletter, ni pour du profilage ou une décision automatisée.
+
+</InfoSection>
+
+<InfoSection id="privacy-legal-basis-title" title="Bases légales">
+
+- **Intérêt légitime** (article 6, paragraphe 1, point f du RGPD) : répondre aux demandes qui vous sont adressées et garantir la sécurité du site.
+- **Obligation légale** (article 6, paragraphe 1, point c du RGPD) : conserver certaines données lorsque la loi l'impose ou répondre à une réquisition.
+- **Consentement** (article 6, paragraphe 1, point a du RGPD) : uniquement si un traitement spécifique repose sur votre accord. Aucun traitement optionnel de ce type n'est mis en œuvre à ce jour.
+
+Lorsque le traitement est fondé sur l'intérêt légitime, vous pouvez vous y opposer à tout moment pour des raisons tenant à votre situation particulière.
+
+</InfoSection>
+
+<InfoSection id="privacy-recipients-title" title="Destinataires et sous-traitants">
+
+Vos données sont accessibles aux destinataires suivants, dans la limite de leurs besoins :
+
+- <strong>{legal.publisher.fullName}</strong>, responsable du traitement, qui reçoit et traite les
+  messages.
+- **{legal.emailProcessor.name}**, prestataire d'envoi d'e-mails, {legal.emailProcessor.address}, <InfoLink href={legal.emailProcessor.website}>{legal.emailProcessor.websiteLabel}</InfoLink>. Il achemine le message vers la boîte du responsable et agit comme sous-traitant.
+- **{legal.host.name}**, hébergeur du site et prestataire de sécurité, {legal.host.address}, <InfoLink href={`tel:${legal.host.phoneHref}`}>{legal.host.phoneDisplay}</InfoLink>, <InfoLink href={legal.host.website}>{legal.host.websiteLabel}</InfoLink>. Il traite les données techniques nécessaires à la diffusion et à la protection du site.
+- **{legal.mailboxHost.name}**, hébergeur de la boîte e-mail, {legal.mailboxHost.address}, <InfoLink href={legal.mailboxHost.website}>{legal.mailboxHost.websiteLabel}</InfoLink>. Il conserve les messages reçus.
+
+Ces prestataires peuvent faire appel à des sous-traitants ultérieurs, encadrés par leurs propres engagements de confidentialité et de sécurité. Aucune donnée n'est vendue, louée ou cédée à des fins commerciales. Les autorités publiques peuvent en recevoir sur le fondement d'une obligation légale.
+
+</InfoSection>
+
+<InfoSection id="privacy-transfers-title" title="Transferts hors de l'Union européenne">
+
+Resend et Cloudflare sont établis aux États-Unis. Les transferts de données vers ce pays sont encadrés par la décision d'adéquation de la Commission européenne relative au cadre de protection des données entre l'Union européenne et les États-Unis (EU-U.S. Data Privacy Framework), auquel ces prestataires sont certifiés, et/ou par les clauses contractuelles types, complétées par des mesures supplémentaires.
+
+{legal.mailboxHost.name} est établi en Allemagne, au sein de l'Union européenne. Les données transmises à chaque prestataire sont limitées à ce qui est nécessaire à sa prestation.
+
+</InfoSection>
+
+<InfoSection id="privacy-retention-title" title="Durée de conservation">
+
+- **Messages de contact :** {legal.retention.contact}, puis suppression, sauf obligation légale ou litige en cours.
+- **Journaux techniques Cloudflare :** {legal.retention.cloudflareLogs}, pour la sécurité et le diagnostic.
+- **Journaux et métadonnées Resend :** {legal.retention.resend}, conformément à sa politique de conservation.
+
+Les données peuvent être conservées plus longtemps si la loi l'exige ou pour la constatation, l'exercice ou la défense de droits en justice.
+
+</InfoSection>
+
+<InfoSection id="privacy-rights-title" title="Vos droits">
+
+Vous disposez des droits suivants :
+
+- Droit d'accès à vos données et d'obtenir une copie.
+- Droit de rectification des données inexactes ou incomplètes.
+- Droit à l'effacement, dans les conditions prévues par le RGPD.
+- Droit à la limitation du traitement.
+- Droit d'opposition, notamment lorsque le traitement repose sur l'intérêt légitime.
+- Droit à la portabilité lorsque le traitement est fondé sur votre consentement ou l'exécution d'un contrat et qu'il est automatisé.
+- Droit de retirer votre consentement à tout moment, lorsque le traitement repose sur celui-ci.
+- Droit de définir des directives relatives au sort de vos données après votre décès.
+
+Pour exercer ces droits, écrivez à <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> ou appelez le <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink>. Une preuve d'identité peut être demandée en cas de doute raisonnable. La demande sera traitée dans un délai d'un mois, pouvant être prolongé de deux mois si elle est complexe.
+
+Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <abbr title="Commission nationale de l'informatique et des libertés">CNIL</abbr> : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 ; <InfoLink href="tel:+33153732222">01 53 73 22 22</InfoLink> ; [www.cnil.fr/fr/plaintes](https://www.cnil.fr/fr/plaintes).
+
+</InfoSection>
+
+<InfoSection id="privacy-security-title" title="Sécurité">
+
+Le site utilise HTTPS. L'accès à la boîte e-mail et aux services d'hébergement est protégé par des mesures d'authentification et de limitation des accès. Les données sont limitées à ce qui est nécessaire aux finalités décrites. Aucune transmission par e-mail n'étant totalement sécurisée, il est recommandé de ne pas envoyer d'informations sensibles via le formulaire.
+
+</InfoSection>
+
+<InfoSection id="privacy-minors-title" title="Mineurs">
+
+Le site n'est pas destiné aux enfants de moins de 15 ans. Aucune donnée concernant un mineur n'est collectée sciemment. Si vous constatez qu'un mineur a transmis des données, contactez le responsable du traitement pour demander leur suppression.
+
+</InfoSection>
+
+<InfoSection id="privacy-changes-title" title="Modifications de la politique">
+
+Cette politique peut être mise à jour pour tenir compte de l'évolution du site ou de la réglementation. La version applicable est celle publiée sur cette page.
+
+</InfoSection>

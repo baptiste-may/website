@@ -1,0 +1,40 @@
+---
+import type { NavigationLink } from "@/types/navigation";
+
+type Props = { link: NavigationLink; hideLabel?: boolean };
+
+const { link, hideLabel } = Astro.props;
+const Icon = link.icon;
+
+const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
+const isActive = normalizePath(Astro.url.pathname) === normalizePath(link.to);
+---
+
+<li>
+  <a
+    href={link.to}
+    class:list={["btn rounded-full whitespace-nowrap", isActive ? "btn-primary" : ""]}
+    aria-label={link.label}
+    aria-current={isActive ? "page" : undefined}
+  >
+    <Icon />
+    <span class:list={["hidden md:inline", { "sr-only": hideLabel }]}>{link.label}</span>
+  </a>
+</li>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    a {
+      transition:
+        background-color 150ms ease-out,
+        color 150ms ease-out,
+        transform 150ms ease-out;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    a:hover {
+      transform: translateY(-1px);
+    }
+  }
+</style>

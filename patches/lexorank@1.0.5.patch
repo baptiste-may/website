@@ -1,0 +1,62 @@
+diff --git a/lib/index.js b/lib/index.js
+index 780c7d04b407d9ca841d814854d1c401e5694c1f..9dcba73159823114ecddb77efb3c71db9543bcb5 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -14,5 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+-__exportStar(require("./lexoRank"), exports);
+-__exportStar(require("./numeralSystems"), exports);
++var lexoRank = require("./lexoRank");
++__exportStar(lexoRank, exports);
++var numeralSystems = require("./numeralSystems");
++__exportStar(numeralSystems, exports);
+diff --git a/lib/lexoRank/index.js b/lib/lexoRank/index.js
+index 563ea044349be282d35c5d2be8bc2f1181ec1ade..62d942cde350ebad7b5eb14a9c98e2314101c13e 100644
+--- a/lib/lexoRank/index.js
++++ b/lib/lexoRank/index.js
+@@ -14,7 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+-__exportStar(require("./lexoRank"), exports);
+-__exportStar(require("./lexoRankBucket"), exports);
+-__exportStar(require("./lexoDecimal"), exports);
+-__exportStar(require("./lexoInteger"), exports);
++var lexoRank = require("./lexoRank");
++__exportStar(lexoRank, exports);
++var lexoRankBucket = require("./lexoRankBucket");
++__exportStar(lexoRankBucket, exports);
++var lexoDecimal = require("./lexoDecimal");
++__exportStar(lexoDecimal, exports);
++var lexoInteger = require("./lexoInteger");
++__exportStar(lexoInteger, exports);
+diff --git a/lib/numeralSystems/index.js b/lib/numeralSystems/index.js
+index ef0d3b6c73657ff9e538363b51703e3aa623213d..d6e1ce0673681059165ddd3850bf4284a1836b3a 100644
+--- a/lib/numeralSystems/index.js
++++ b/lib/numeralSystems/index.js
+@@ -14,7 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+-__exportStar(require("./lexoNumeralSystem"), exports);
+-__exportStar(require("./lexoNumeralSystem10"), exports);
+-__exportStar(require("./lexoNumeralSystem36"), exports);
+-__exportStar(require("./lexoNumeralSystem64"), exports);
++var lexoNumeralSystem = require("./lexoNumeralSystem");
++__exportStar(lexoNumeralSystem, exports);
++var lexoNumeralSystem10 = require("./lexoNumeralSystem10");
++__exportStar(lexoNumeralSystem10, exports);
++var lexoNumeralSystem36 = require("./lexoNumeralSystem36");
++__exportStar(lexoNumeralSystem36, exports);
++var lexoNumeralSystem64 = require("./lexoNumeralSystem64");
++__exportStar(lexoNumeralSystem64, exports);
+diff --git a/lib/numeralSystems/lexoNumeralSystem.js b/lib/numeralSystems/lexoNumeralSystem.js
+index c8ad2e549bdc6801e0d1c80b0308d4b9bd4985ce..6c3341d0d5895277b9d0553ddf32c4fadc83b7c9 100644
+--- a/lib/numeralSystems/lexoNumeralSystem.js
++++ b/lib/numeralSystems/lexoNumeralSystem.js
+@@ -1,2 +1,3 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
++module.exports = exports;

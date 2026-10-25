@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "may-baptiste-website",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-10-25",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
+}

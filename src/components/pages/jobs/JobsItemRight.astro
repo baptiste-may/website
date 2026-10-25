@@ -1,0 +1,27 @@
+---
+import type { JOBS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+type Props = { job: JOBS_QUERY_RESULT[number] };
+
+const { job } = Astro.props;
+
+const badgeColors: Record<string, string> = {
+  neutral: "badge-neutral",
+  primary: "badge-primary",
+  secondary: "badge-secondary",
+  accent: "badge-accent",
+  info: "badge-info",
+  success: "badge-success",
+  warning: "badge-warning",
+  error: "badge-error",
+};
+
+const tag = job.tag;
+const badgeClass = tag?.color ? badgeColors[tag.color] : undefined;
+---
+
+<h2 class="mb-2 flex flex-wrap items-center gap-4 text-lg font-black">
+  {tag && <span class:list={["badge", badgeClass]}>{tag.label}</span>}
+  {job.title}
+</h2>
+<p class="whitespace-pre-line">{job.description}</p>

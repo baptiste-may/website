@@ -1,0 +1,103 @@
+---
+import "@/assets/css/main.css";
+
+import { SEO } from "astro-seo";
+
+import NavigationBar from "@/components/navigation/NavigationBar.astro";
+
+type Props = { title?: string; description?: string; noindex?: boolean };
+
+const {
+  title,
+  description = "Portfolio de May Baptiste : expériences, projets et contact.",
+  noindex = false,
+} = Astro.props;
+
+const titleTemplate = "%s - May Baptiste";
+const titleDefault = "May Baptiste";
+const pageTitle = title ? titleTemplate.replace("%s", title) : titleDefault;
+
+const siteURL = Astro.site ?? new URL(Astro.url.origin);
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const imageURL = new URL("/og-image.jpg", siteURL);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title={title}
+      titleTemplate={titleTemplate}
+      titleDefault={titleDefault}
+      description={description}
+      canonical={canonicalURL.href}
+      noindex={noindex}
+      nofollow={noindex}
+      openGraph={{
+        basic: { title: pageTitle, type: "website", image: imageURL.href, url: canonicalURL.href },
+        optional: { description, locale: "fr_FR", siteName: "May Baptiste" },
+        image: { type: "image/jpeg", width: 1200, height: 630, alt: "May Baptiste — portfolio" },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: pageTitle,
+        description,
+        image: imageURL.href,
+        imageAlt: "May Baptiste — portfolio",
+      }}
+      extend={{
+        link: [
+          { rel: "icon", href: "/favicon.ico", sizes: "any" },
+          { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+          { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+          { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+          { rel: "sitemap", type: "application/xml", href: "/sitemap-index.xml" },
+        ],
+        meta: [
+          { name: "author", content: "May Baptiste" },
+          { name: "theme-color", content: "#ece3ca" },
+        ],
+      }}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Aller au contenu principal
+    </a>
+    <div class="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-6 p-4 sm:gap-12">
+      <NavigationBar class="mx-auto w-full max-w-4xl shrink-0" />
+      <main id="main" class="min-h-0 flex-1">
+        <h1 class="sr-only">{title ?? titleDefault}</h1>
+        <slot />
+      </main>
+    </div>
+    <style>
+      @keyframes page-enter {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        main {
+          animation: page-enter 180ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+      }
+
+      @media print {
+        main {
+          animation: none;
+        }
+      }
+    </style>
+  </body>
+</html>

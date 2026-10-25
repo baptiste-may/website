@@ -1,0 +1,61 @@
+---
+import { Share2 } from "@lucide/astro";
+import { sanityClient } from "sanity:client";
+
+import { CONTACT_LINKS_QUERY } from "@/queries/contact";
+import type { CONTACT_LINKS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+import { linkStyle, maskStyle } from "./utils";
+
+type ContactLink = CONTACT_LINKS_QUERY_RESULT[number];
+type ContactLinkWithMask = ContactLink & { maskImage?: string };
+
+const links = await sanityClient.fetch<CONTACT_LINKS_QUERY_RESULT>(CONTACT_LINKS_QUERY);
+
+const linksWithIcons: ContactLinkWithMask[] = await Promise.all(
+  links.map(async (link) => {
+    if (!link.iconUrl) {
+      return link;
+    }
+
+    try {
+      const response = await fetch(link.iconUrl);
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const svg = await response.text();
+
+      return { ...link, maskImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")` };
+    } catch (error) {
+      console.warn(`Unable to inline Sanity SVG ${link.iconUrl}`, error);
+      return { ...link, maskImage: `url("${link.iconUrl}")` };
+    }
+  }),
+);
+---
+
+<section class="card bg-base-200 shadow-xl" aria-labelledby="contact-social-title">
+  <div class="card-body flex flex-col gap-2">
+    <h2 id="contact-social-title" class="mb-4 card-title text-2xl">
+      <Share2 />
+      Via les réseaux
+    </h2>
+    {linksWithIcons.map((link) => (
+      <a
+        class="btn border"
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={linkStyle(link)}
+      >
+        {link.maskImage && (
+          <span aria-hidden="true" class="size-4 shrink-0" style={maskStyle(link.maskImage)}></span>
+        )}
+        {link.label}
+        <span class="sr-only"> (ouvre un nouvel onglet)</span>
+      </a>
+    ))}
+  </div>
+</section>

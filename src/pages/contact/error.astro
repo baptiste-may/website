@@ -1,0 +1,27 @@
+---
+import { CircleAlert } from "@lucide/astro";
+
+import Layout from "@/layouts/default.astro";
+---
+
+<Layout
+  title="L'envoi a échoué"
+  description="Votre message n'a pas pu être envoyé. Réessayez depuis la page de contact."
+  noindex
+>
+  <div class="hero rounded-box bg-base-200">
+    <div class="hero-content w-full max-w-md flex-col items-center gap-0 p-8 sm:p-16 lg:p-24">
+      <h2 class="mb-4 flex flex-wrap items-center justify-center gap-2 text-4xl">
+        <CircleAlert aria-hidden="true" size={36} />
+        L'envoi a échoué
+      </h2>
+      <p class="text-center text-lg">
+        Votre message n'a pas pu être envoyé. Vérifiez votre connexion et réessayez depuis le
+        formulaire.
+      </p>
+      <a href="/contact" class="btn mt-8 btn-primary">
+        Revenir au formulaire
+      </a>
+    </div>
+  </div>
+</Layout>

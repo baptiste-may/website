@@ -1,0 +1,40 @@
+---
+import InfoCard from "@/components/info/InfoCard.astro";
+import InfoLink from "@/components/info/InfoLink.astro";
+import InfoList from "@/components/info/InfoList.astro";
+import InfoTableOfContents from "@/components/info/InfoTableOfContents.astro";
+import Layout from "@/layouts/default.astro";
+import { Content as Accessibility } from "@/legal/accessibility.mdx";
+import { Content as Cookies } from "@/legal/cookies.mdx";
+import { Content as Credits } from "@/legal/credits.mdx";
+import { Content as LegalNotice } from "@/legal/legal-notice.mdx";
+import { Content as Privacy } from "@/legal/privacy.mdx";
+
+const sections = [
+  { id: "legal-notice", label: "Mentions légales", Content: LegalNotice },
+  { id: "privacy", label: "Politique de confidentialité", Content: Privacy },
+  { id: "cookies", label: "Cookies et traceurs", Content: Cookies },
+  { id: "accessibility", label: "Accessibilité", Content: Accessibility },
+  { id: "credits", label: "Crédits", Content: Credits },
+];
+
+const mdxComponents = { a: InfoLink, ul: InfoList };
+---
+
+<Layout
+  title="Informations légales"
+  description="Mentions légales, politique de confidentialité, cookies et accessibilité du site de May Baptiste."
+>
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-[16rem_minmax(0,1fr)]">
+    <aside class="lg:sticky lg:top-4 lg:self-start">
+      <InfoTableOfContents sections={sections} />
+    </aside>
+    <div class="flex min-w-0 flex-col gap-8">
+      {sections.map(({ id, label, Content }) => (
+        <InfoCard id={id} title={label}>
+          <Content components={mdxComponents} />
+        </InfoCard>
+      ))}
+    </div>
+  </div>
+</Layout>

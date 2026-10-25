@@ -1,0 +1,36 @@
+@utility btn {
+  @apply rounded-full;
+}
+
+@utility input {
+  @apply rounded-full;
+}
+
+@utility select {
+  @apply rounded-full;
+}
+
+@utility textarea {
+  @apply rounded-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      transform 150ms ease-out,
+      box-shadow 150ms ease-out,
+      background-color 150ms ease-out,
+      border-color 150ms ease-out,
+      color 150ms ease-out;
+  }
+
+  .btn:not(:disabled):not(.btn-disabled):active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .btn:not(:disabled):not(.btn-disabled):hover {
+    transform: translateY(-1px);
+  }
+}

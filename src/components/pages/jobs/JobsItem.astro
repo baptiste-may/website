@@ -1,0 +1,99 @@
+---
+import { BriefcaseBusiness } from "@lucide/astro";
+
+import JobsItemLeft from "@/components/pages/jobs/JobsItemLeft.astro";
+import JobsItemRight from "@/components/pages/jobs/JobsItemRight.astro";
+import type { JOBS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+type Props = { job: JOBS_QUERY_RESULT[number]; index: number };
+
+const { job, index } = Astro.props;
+---
+
+<li class="timeline-item gap-x-2">
+  {index !== 0 && <hr class="timeline-line" />}
+  <div class={index % 2 === 0 ? "timeline-start" : "timeline-end"}>
+    <JobsItemLeft job={job} />
+  </div>
+  <div class="timeline-middle">
+    <div class="grid size-7 place-items-center rounded-full border-2 border-base-300 bg-base-100">
+      <BriefcaseBusiness class="size-3.5" />
+    </div>
+  </div>
+  <div
+    class:list={["timeline-box bg-base-200", index % 2 === 0 ? "timeline-end" : "timeline-start"]}
+  >
+    <JobsItemRight job={job} />
+  </div>
+  <hr class="timeline-line" />
+</li>
+
+<style>
+  .timeline-item {
+    grid-template-rows: 1rem auto auto;
+  }
+
+  .timeline-start,
+  .timeline-end {
+    height: 100%;
+    grid-row-start: 2;
+  }
+
+  @media (max-width: 49.999rem) {
+    .timeline-filler {
+      display: none;
+    }
+
+    .timeline-item {
+      position: relative;
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+      grid-template-rows: auto auto auto;
+      column-gap: 0.75rem;
+      align-items: start;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0.875rem;
+      width: 2px;
+      background-color: var(--color-base-300);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item > hr {
+      display: none;
+    }
+
+    .timeline-item .timeline-middle {
+      position: relative;
+      z-index: 1;
+      grid-column: 1;
+      grid-row: 2;
+      place-self: start center;
+      margin-top: 0.25rem;
+    }
+
+    .timeline-item > div:not(.timeline-middle) {
+      grid-column: 2;
+      height: auto;
+      margin: 0;
+      place-self: stretch;
+    }
+
+    .timeline-item > div:not(.timeline-middle):first-of-type {
+      grid-row: 2;
+    }
+
+    .timeline-item > div:not(.timeline-middle):last-of-type {
+      grid-row: 3;
+      margin-top: 0.5rem;
+    }
+
+    .timeline-box {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun install --frozen-lockfile
+      - run: bun run format:check
+      - run: bun run typegen
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run build
+      - name: Check client-side JavaScript
+        run: |
+          if find dist -name '*.js' -print -quit | grep -q .; then
+            echo "Unexpected JavaScript bundle in dist:"
+            find dist -name '*.js'
+            exit 1
+          fi
+          if grep -R '<script type="module"' dist --include='*.html'; then
+            echo "Unexpected module script in dist HTML"
+            exit 1
+          fi

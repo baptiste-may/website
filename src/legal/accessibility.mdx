@@ -1,0 +1,13 @@
+import InfoLink from "@/components/info/InfoLink.astro";
+import { legal } from "@/types/legal.ts";
+
+Ce site vise à être utilisable par tous, y compris avec un lecteur d'écran, une navigation au clavier ou un affichage agrandi. Les choix de conception s'inspirent du <abbr title="Référentiel général d'amélioration de l'accessibilité">RGAA</abbr> 4.1 et des <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2, niveau AA.
+
+- Structure sémantique, titres hiérarchisés et langue française déclarée.
+- Navigation au clavier, lien d'évitement et indication visible du focus.
+- Formulaires avec étiquettes, aides contextuelles et validation native.
+- Respect de la préférence système de réduction des animations.
+- Contrastes et tailles de texte pensés pour la lisibilité.
+- Formulaire de contact fonctionnel sans JavaScript.
+
+Ce site n'a pas fait l'objet d'un audit d'accessibilité formel. Si vous rencontrez une difficulté, contactez {legal.publisher.fullName} à l'adresse <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> ou au <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink> en précisant la page concernée et le problème rencontré. Une réponse sera apportée dans les meilleurs délais.

@@ -1,0 +1,12 @@
+---
+import ContactMailForm from "@/components/pages/contact/ContactMailForm.astro";
+import ContactSocialNetworks from "@/components/pages/contact/ContactSocialNetworks.astro";
+import Layout from "@/layouts/default.astro";
+---
+
+<Layout title="Contact" description="Contactez May Baptiste par e-mail ou via ses réseaux sociaux.">
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_1fr]">
+    <ContactMailForm />
+    <ContactSocialNetworks />
+  </div>
+</Layout>

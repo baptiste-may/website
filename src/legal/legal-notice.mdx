@@ -1,0 +1,101 @@
+import InfoLink from "@/components/info/InfoLink.astro";
+import InfoSection from "@/components/info/InfoSection.astro";
+import { legal } from "@/types/legal.ts";
+
+Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (<abbr title="Loi pour la confiance dans l'économie numérique">LCEN</abbr>), notamment ses articles 1-1 et 1-2, les informations suivantes sont portées à la connaissance des utilisateurs du site.
+
+<InfoSection id="legal-publisher-title" title="Éditeur du site">
+
+<dl class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-[10rem_minmax(0,1fr)]">
+  <dt class="font-semibold">Nom</dt>
+  <dd class="min-w-0 wrap-break-word">{legal.publisher.fullName}</dd>
+
+<dt class="font-semibold">Statut</dt>
+<dd class="min-w-0 wrap-break-word">{legal.publisher.status}</dd>
+
+<dt class="font-semibold">Téléphone</dt>
+<dd class="min-w-0 wrap-break-word">
+  <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink>
+</dd>
+
+<dt class="font-semibold">E-mail</dt>
+<dd class="min-w-0 wrap-break-word">
+  <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink>
+</dd>
+
+  <dt class="font-semibold">Adresse postale</dt>
+  <dd class="min-w-0 wrap-break-word">Non publiée. Conformément à l'article 1-1, II de la LCEN (anciennement article 6, III, 2), l'éditeur, personne physique agissant à titre non professionnel, ne publie pas son adresse postale et a communiqué son identité complète à l'hébergeur.</dd>
+</dl>
+
+Le site est publié sous le nom « May Baptiste ». L'éditeur agit en qualité de particulier. Aucun numéro SIRET, RCS ou TVA intracommunautaire n'est applicable.
+
+</InfoSection>
+
+<InfoSection id="legal-director-title" title="Directeur de la publication">
+
+Le directeur de la publication est {legal.publicationDirector}, en sa qualité d'éditeur du site. Il peut être joint à l'adresse <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> ou au <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink>.
+
+</InfoSection>
+
+<InfoSection id="legal-host-title" title="Hébergeur">
+
+<dl class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-[10rem_minmax(0,1fr)]">
+  <dt class="font-semibold">Dénomination</dt>
+  <dd class="min-w-0 wrap-break-word">{legal.host.name}</dd>
+
+<dt class="font-semibold">Adresse</dt>
+<dd class="min-w-0 wrap-break-word">{legal.host.address}</dd>
+
+<dt class="font-semibold">Téléphone</dt>
+<dd class="min-w-0 wrap-break-word">
+  <InfoLink href={`tel:${legal.host.phoneHref}`}>{legal.host.phoneDisplay}</InfoLink>
+</dd>
+
+<dt class="font-semibold">Site web</dt>
+<dd class="min-w-0 wrap-break-word">
+  <InfoLink href={legal.host.website}>{legal.host.websiteLabel}</InfoLink>
+</dd>
+
+  <dt class="font-semibold">Établissement en France</dt>
+  <dd class="min-w-0 wrap-break-word">{legal.host.euEntity}</dd>
+</dl>
+
+</InfoSection>
+
+<InfoSection id="legal-ip-title" title="Propriété intellectuelle">
+
+L'ensemble des contenus présents sur ce site (textes, images, photographies, illustrations, éléments graphiques, structure et code source) est protégé par le droit d'auteur. Sauf mention contraire, ils appartiennent à {legal.publisher.fullName} ou sont utilisés avec l'autorisation de leurs titulaires.
+
+Toute reproduction, représentation, adaptation ou exploitation, totale ou partielle, sans autorisation écrite préalable est interdite, sous réserve des exceptions prévues par la loi, notamment la courte citation, la revue de presse et la parodie.
+
+Les marques, logos et signes distinctifs de tiers cités ou affichés appartiennent à leurs propriétaires respectifs. Les icônes Lucide sont distribuées sous licence ISC.
+
+Si vous estimez qu'un contenu vous appartient et qu'il est utilisé sans autorisation, contactez l'éditeur à l'adresse <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> afin qu'une solution puisse être trouvée.
+
+</InfoSection>
+
+<InfoSection id="legal-links-title" title="Liens hypertextes">
+
+Le site peut contenir des liens vers des sites tiers. L'éditeur n'exerce aucun contrôle sur leur contenu, leurs pratiques ou leur politique de confidentialité et décline toute responsabilité à leur égard. L'ouverture de ces liens se fait sous la responsabilité de l'utilisateur.
+
+</InfoSection>
+
+<InfoSection id="legal-liability-title" title="Responsabilité">
+
+Les informations et contenus présentés sur ce site sont fournis à titre indicatif. L'éditeur s'efforce de les maintenir exacts et à jour, sans pouvoir garantir l'exhaustivité ou l'absence d'erreur. Le site peut être temporairement indisponible pour maintenance ou pour des raisons techniques.
+
+L'éditeur ne peut être tenu responsable des dommages directs ou indirects résultant de l'accès ou de l'utilisation du site, dans les limites autorisées par la loi.
+
+</InfoSection>
+
+<InfoSection id="legal-law-title" title="Droit applicable">
+
+Le présent site est soumis au droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français sont compétents, sous réserve des règles impératives applicables aux consommateurs.
+
+</InfoSection>
+
+<InfoSection id="legal-contact-title" title="Contact">
+
+Pour toute question relative aux mentions légales, écrivez à <InfoLink href={`mailto:${legal.publisher.email}`}>{legal.publisher.email}</InfoLink> ou appelez le <InfoLink href={`tel:${legal.publisher.phoneHref}`}>{legal.publisher.phoneDisplay}</InfoLink>.
+
+</InfoSection>

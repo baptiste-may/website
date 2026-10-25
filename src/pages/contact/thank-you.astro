@@ -1,0 +1,27 @@
+---
+import { CircleCheck } from "@lucide/astro";
+
+import Layout from "@/layouts/default.astro";
+---
+
+<Layout title="Message envoyé" description="Votre message a bien été envoyé." noindex>
+  <div class="hero rounded-box bg-base-200">
+    <div class="hero-content w-full max-w-md flex-col items-center gap-0 p-8 sm:p-16 lg:p-24">
+      <h2 class="mb-4 flex flex-wrap items-center justify-center gap-2 text-center text-4xl">
+        <CircleCheck aria-hidden="true" size={36} />
+        Message envoyé
+      </h2>
+      <p class="text-center text-lg">
+        Merci ! Votre message a bien été envoyé. Je vous répondrai à l'adresse indiquée.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        <a href="/contact" class="btn btn-primary">
+          Revenir au contact
+        </a>
+        <a href="/" class="btn btn-ghost">
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

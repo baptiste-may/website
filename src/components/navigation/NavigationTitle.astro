@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+
+import avatar from "@/assets/avatar.jpg";
+---
+
+<li>
+  <a href="/" class="btn">
+    <div class="avatar">
+      <div class="w-9 rounded-full">
+        <Image src={avatar} alt="" width={36} height={36} densities={[1, 2]} loading="eager" />
+      </div>
+    </div>
+    <span class="font-semibold">May Baptiste</span>
+  </a>
+</li>

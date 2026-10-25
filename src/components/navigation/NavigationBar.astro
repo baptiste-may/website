@@ -1,0 +1,44 @@
+---
+import { Menu } from "@lucide/astro";
+
+import NavigationDrawerOpenButton from "@/components/navigation/drawer/NavigationDrawerOpenButton.astro";
+import NavigationItem from "@/components/navigation/NavigationItem.astro";
+import NavigationTitle from "@/components/navigation/NavigationTitle.astro";
+import { navigationLinks } from "@/types/navigation";
+
+import NavigationDrawer from "./drawer/NavigationDrawer.astro";
+
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+---
+
+<NavigationDrawer>
+  <nav
+    aria-label="Navigation principale"
+    class:list={["navbar rounded-box bg-base-200 p-2 shadow-xl", className]}
+  >
+    <ul class="navbar-start">
+      <NavigationTitle />
+    </ul>
+    <ul class="navbar-center hidden gap-1 sm:flex">
+      {navigationLinks
+        .filter((link) => !link.positionLeft)
+        .map((link) => (
+          <NavigationItem link={link} hideLabel={link.hideLabel} />
+        ))}
+    </ul>
+    <ul class="navbar-end hidden gap-1 sm:flex">
+      {navigationLinks
+        .filter((link) => link.positionLeft)
+        .map((link) => (
+          <NavigationItem link={link} hideLabel={link.hideLabel} />
+        ))}
+    </ul>
+    <ul class="navbar-end flex gap-1 sm:hidden">
+      <NavigationDrawerOpenButton class="btn">
+        <Menu />
+      </NavigationDrawerOpenButton>
+    </ul>
+  </nav>
+</NavigationDrawer>

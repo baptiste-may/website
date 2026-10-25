@@ -1,0 +1,19 @@
+---
+import type { JOBS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+type Props = { job: JOBS_QUERY_RESULT[number] };
+
+const { job } = Astro.props;
+
+const startDate = new Date(job.start_date);
+const endDate = job.end_date ? new Date(job.end_date) : null;
+
+const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", timeZone: "UTC" };
+const startString = startDate.toLocaleDateString("fr", options);
+const endString = endDate ? endDate.toLocaleDateString("fr", options) : "Aujourd'hui";
+---
+
+<p class="mt-0.5 font-mono italic">
+  <time datetime={job.start_date}>{startString}</time> -{" "}
+  {job.end_date ? <time datetime={job.end_date}>{endString}</time> : endString}
+</p>

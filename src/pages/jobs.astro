@@ -1,0 +1,34 @@
+---
+import { sanityClient } from "sanity:client";
+
+import JobsItem from "@/components/pages/jobs/JobsItem.astro";
+import Layout from "@/layouts/default.astro";
+import { JOBS_QUERY } from "@/queries/jobs";
+import type { JOBS_QUERY_RESULT } from "@/types/sanity-typegen";
+
+const jobs = await sanityClient.fetch<JOBS_QUERY_RESULT>(JOBS_QUERY);
+---
+
+<Layout title="Expériences" description="Parcours professionnel et expériences de May Baptiste.">
+  <div class="flex h-full flex-col">
+    <ul class="timeline timeline-vertical min-h-0 flex-1">
+      {jobs.map((job, index) => (
+        <JobsItem job={job} index={index} />
+      ))}
+      <li class="timeline-item timeline-filler">
+        <hr class="timeline-line" />
+      </li>
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .timeline-filler {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 0;
+  }
+</style>

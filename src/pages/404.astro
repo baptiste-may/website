@@ -1,0 +1,57 @@
+---
+import { CircleX } from "@lucide/astro";
+
+import Layout from "@/layouts/default.astro";
+---
+
+<Layout
+  title="Page introuvable"
+  description="La page demandée n'existe pas sur le site de May Baptiste."
+  noindex
+>
+  <div class="hero rounded-box bg-base-200">
+    <div class="hero-content w-full max-w-md flex-col items-center gap-0 p-8 sm:p-16 lg:p-24">
+      <h2 class="mb-4 flex flex-wrap items-center justify-center gap-2 text-4xl">
+        <span class="error-icon inline-flex">
+          <CircleX size={36} />
+        </span>
+        Page introuvable
+      </h2>
+      <p class="text-center text-lg">Oups ! La page demandée n'existe pas.</p>
+      <a href="/" class="btn mt-8 btn-primary">
+        Retourner à l'accueil
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @keyframes error-wobble {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+
+    20% {
+      transform: rotate(-6deg);
+    }
+
+    40% {
+      transform: rotate(5deg);
+    }
+
+    60% {
+      transform: rotate(-3deg);
+    }
+
+    80% {
+      transform: rotate(1deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .error-icon {
+      animation: error-wobble 600ms ease-in-out 200ms both;
+    }
+  }
+</style>

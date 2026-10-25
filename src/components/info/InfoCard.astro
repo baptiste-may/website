@@ -1,0 +1,14 @@
+---
+type Props = { id: string; title: string };
+
+const { id, title } = Astro.props;
+---
+
+<article id={id} class="card scroll-mt-6 bg-base-200 shadow-xl" aria-labelledby={`${id}-title`}>
+  <div class="card-body gap-6">
+    <h2 id={`${id}-title`} class="card-title text-2xl">
+      {title}
+    </h2>
+    <slot />
+  </div>
+</article>
