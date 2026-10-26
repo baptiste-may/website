@@ -21,22 +21,38 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: (S, context) =>
-        S.list()
+      structure: (S, context) => {
+        // New document types must be registered in one of these groups. The five
+        // current types are projects, jobs, contact-link, project-tags, and jobs-tags.
+        const contentItems = [
+          S.documentTypeListItem("projects").title("🚀 Projects"),
+          orderableDocumentListDeskItem({ type: "jobs", title: "💼 Jobs", S, context }),
+          orderableDocumentListDeskItem({
+            type: "contact-link",
+            title: "🔗 Contact Links",
+            S,
+            context,
+          }),
+        ];
+
+        const tagItems = [
+          S.documentTypeListItem("project-tags").title("🎨 Project Tags"),
+          S.documentTypeListItem("jobs-tags").title("🧩 Jobs Tags"),
+        ];
+
+        return S.list()
           .title("Content")
           .items([
-            orderableDocumentListDeskItem({ type: "jobs", title: "Jobs", S, context }),
-            orderableDocumentListDeskItem({
-              type: "contact-link",
-              title: "Contact Links",
-              S,
-              context,
-            }),
-            S.divider(),
-            ...S.documentTypeListItems().filter(
-              (item) => !["jobs", "contact-link"].includes(item.getId() || ""),
-            ),
-          ]),
+            S.listItem()
+              .id("content")
+              .title("📝 Content")
+              .child(S.list().id("content-list").title("📝 Content").items(contentItems)),
+            S.listItem()
+              .id("tags")
+              .title("🏷️ Tags")
+              .child(S.list().id("tags-list").title("🏷️ Tags").items(tagItems)),
+          ]);
+      },
     }),
     visionTool(),
     colorInput(),
