@@ -6,6 +6,8 @@ import { structureTool } from "sanity/structure";
 
 import { schemaTypes } from "./schemaTypes";
 
+// The Astro build replaces these process.env reads with the `vite.define` values
+// from astro.config.mjs so the Studio bundle can run in the browser. Keep both in sync.
 const projectId =
   process.env.SANITY_STUDIO_PROJECT_ID || process.env.SANITY_PROJECT_ID || "project_id";
 const dataset = process.env.SANITY_STUDIO_DATASET || process.env.SANITY_DATASET || "dev";

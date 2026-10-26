@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /studio
 
 Sitemap: https://may-baptiste.fr/sitemap-index.xml

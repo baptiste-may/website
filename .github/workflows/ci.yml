@@ -16,6 +16,9 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      SANITY_DATASET: dev
+      SANITY_STUDIO_DATASET: dev
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -33,14 +36,5 @@ jobs:
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run build
-      - name: Check client-side JavaScript
-        run: |
-          if find dist -name '*.js' -print -quit | grep -q .; then
-            echo "Unexpected JavaScript bundle in dist:"
-            find dist -name '*.js'
-            exit 1
-          fi
-          if grep -R '<script type="module"' dist --include='*.html'; then
-            echo "Unexpected module script in dist HTML"
-            exit 1
-          fi
+      - name: Verify embedded Sanity Studio
+        run: test -f dist/client/studio/index.html
